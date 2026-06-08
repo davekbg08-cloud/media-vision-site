@@ -4,15 +4,24 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Media Vision — Nos Applications</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --font-body: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Syne', var(--font-body);
+    --font-label: 'Space Grotesk', var(--font-body);
+  }
+
   body {
     background: #060b14;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-body);
     color: #f1f5f9;
     min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   /* NAV DEMO */
@@ -30,13 +39,13 @@
   }
 
   .logo {
-    font-family: 'Syne', sans-serif;
+    font-family: var(--font-display);
     font-weight: 800;
     font-size: 20px;
     background: linear-gradient(90deg, #00C6FF, #A855F7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -0.5px;
+    letter-spacing: 0;
   }
 
   .nav-links {
@@ -49,7 +58,7 @@
     color: #64748b;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     transition: color 0.2s;
   }
 
@@ -82,8 +91,8 @@
     color: #00C6FF;
     font-size: 11px;
     font-weight: 700;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 1.5px;
+    font-family: var(--font-label);
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 
@@ -94,12 +103,13 @@
   }
 
   h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.1;
+    font-size: 3.2rem;
+    line-height: 1.08;
     margin-bottom: 20px;
     color: #f1f5f9;
+    letter-spacing: 0;
   }
 
   h1 span {
@@ -111,8 +121,8 @@
   .subtitle {
     color: #64748b;
     font-size: 16px;
-    line-height: 1.7;
-    max-width: 460px;
+    line-height: 1.75;
+    max-width: 540px;
   }
 
   /* GRILLE */
@@ -177,7 +187,7 @@
   }
 
   .app-name {
-    font-family: 'Syne', sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
     font-size: 16px;
     color: #f1f5f9;
@@ -193,14 +203,14 @@
     color: var(--accent);
     font-size: 11px;
     font-weight: 700;
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.5px;
+    font-family: var(--font-label);
+    letter-spacing: 0;
   }
 
   .app-desc {
     color: #94a3b8;
-    font-size: 13.5px;
-    line-height: 1.65;
+    font-size: 13.8px;
+    line-height: 1.72;
   }
 
   /* META */
@@ -226,7 +236,7 @@
   .meta-tag {
     color: #475569;
     font-size: 11px;
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-label);
   }
 
   /* BOUTONS */
@@ -245,7 +255,7 @@
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--font-body);
     text-decoration: none;
     transition: all 0.22s;
     border: 1.5px solid #2d3748;
@@ -298,6 +308,7 @@
     .nav-links { display: none; }
     .apps-section { padding: 50px 20px; }
     .apps-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.35rem; }
   }
 </style>
 </head>
@@ -324,7 +335,7 @@
       <div class="divider-line"></div>
     </div>
     <h1>Nos Applications<br><span>Phares</span></h1>
-    <p class="subtitle">Télécharge nos applications directement depuis le Play Store ou en fichier APK pour une installation manuelle.</p>
+    <p class="subtitle">Téléchargez les applications Media Vision depuis le Play Store ou en fichier APK pour une installation manuelle.</p>
   </div>
 
   <!-- Grille -->
@@ -333,7 +344,7 @@
   <!-- Note APK -->
   <div class="apk-note">
     <span style="font-size:22px">⚠️</span>
-    <p>Pour installer un APK, active l'option <strong>"Sources inconnues"</strong> dans les paramètres de sécurité de ton Android.</p>
+    <p>Pour installer un APK, activez l'option <strong>"Sources inconnues"</strong> dans les paramètres de sécurité de votre appareil Android.</p>
   </div>
 
 </section>
@@ -343,7 +354,7 @@ const apps = [
   {
     name: "Media Vision News",
     category: "Actualités",
-    desc: "Toute l'actualité en temps réel, articles et vidéos exclusifs.",
+    desc: "Toute l'actualité en temps réel, avec articles, alertes et vidéos exclusives.",
     version: "v2.1.0",
     size: "18 Mo",
     icon: "📰",
@@ -356,7 +367,7 @@ const apps = [
   {
     name: "Vision Radio",
     category: "Musique & Audio",
-    desc: "Écoute nos radios en direct et nos podcasts exclusifs.",
+    desc: "Écoutez nos radios en direct et retrouvez nos podcasts exclusifs.",
     version: "v1.4.2",
     size: "12 Mo",
     icon: "📻",
@@ -382,7 +393,7 @@ const apps = [
   {
     name: "Vision Sport",
     category: "Sports",
-    desc: "Scores en direct, analyses et actualités sportives exclusives.",
+    desc: "Suivez les scores en direct, les analyses et les actualités sportives.",
     version: "v1.2.0",
     size: "15 Mo",
     icon: "⚽",
