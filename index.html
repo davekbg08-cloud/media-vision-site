@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media Vision — Tech & Applications</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f0f7ff; --text: #0d1b2e; --accent: #38b6ff; --accent2: #0077cc;
+      --mid: #ddeeff; --glass: rgba(56,182,255,0.08); --border: rgba(56,182,255,0.18);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
+
+    /* CURSOR */
+    .cursor { width:12px; height:12px; background:var(--accent); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transition:transform 0.15s; mix-blend-mode:difference; }
+    .cursor-ring { width:40px; height:40px; border:1px solid rgba(56,182,255,0.4); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:all 0.35s cubic-bezier(0.23,1,0.32,1); }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:500; display:flex; justify-content:space-between; align-items:center; padding:24px 60px; backdrop-filter:blur(20px); border-bottom:1px solid var(--border); background:rgba(240,247,255,0.85); }
+    .logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem; letter-spacing:-0.05em; display:flex; align-items:baseline; color:var(--text); }
+    .logo .dot { color:var(--accent); font-size:1.6rem; line-height:0; margin:0 2px; }
+    .logo .vsuffix { font-size:0.85rem; margin-left:6px; color:rgba(13,27,46,0.4); font-weight:500; }
+    .nav-links { display:flex; gap:36px; list-style:none; }
+    .nav-links a { color:rgba(13,27,46,0.55); text-decoration:none; font-size:0.82rem; font-weight:400; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.3s; }
+    .nav-links a:hover { color:var(--accent); }
+    .nav-cta { background:var(--accent); color:#0d1b2e; border:none; padding:10px 24px; border-radius:100px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.85rem; cursor:none; transition:transform 0.2s,box-shadow 0.2s; }
+    .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(56,182,255,0.3); }
+
+    /* HERO */
+    .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:140px 60px 80px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,119,204,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 20% 80%, rgba(56,182,255,0.08) 0%, transparent 50%); }
+    .hero-tag { display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background:var(--glass); padding:8px 18px; border-radius:100px; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:40px; width:fit-content; animation:fadeUp 0.8s ease both; }
+    .hero-tag::before { content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+    .hero h1 { font-family:'Syne',sans-serif; font-size:clamp(3.5rem,8vw,8rem); font-weight:800; line-height:0.95; letter-spacing:-0.04em; max-width:900px; animation:fadeUp 0.8s 0.15s ease both; }
+    .hero h1 em { font-style:normal; color:transparent; -webkit-text-stroke:1px rgba(13,27,46,0.25); }
+    .hero h1 .hl { position:relative; display:inline-block; }
+    .hero h1 .hl::after { content:''; position:absolute; bottom:8px; left:0; right:0; height:6px; background:var(--accent); border-radius:3px; opacity:0.6; }
+    .hero-sub { margin-top:40px; font-size:1.1rem; color:rgba(13,27,46,0.55); max-width:480px; line-height:1.7; animation:fadeUp 0.8s 0.3s ease both; }
+    .hero-actions { display:flex; gap:16px; margin-top:50px; align-items:center; animation:fadeUp 0.8s 0.45s ease both; }
+    .btn-primary { background:var(--accent); color:#0d1b2e; padding:16px 36px; border-radius:100px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.95rem; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; display:inline-block; }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(56,182,255,0.25); }
+    .btn-ghost { color:var(--text); padding:16px 36px; border-radius:100px; font-size:0.95rem; text-decoration:none; border:1px solid rgba(13,27,46,0.2); transition:border-color 0.3s,background 0.3s; display:inline-block; }
+    .btn-ghost:hover { border-color:rgba(13,27,46,0.4); background:rgba(13,27,46,0.04); }
+
+    /* MARQUEE */
+    .marquee-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:20px 0; overflow:hidden; background:var(--mid); }
+    .marquee-track { display:flex; gap:60px; animation:marquee 22s linear infinite; width:max-content; }
+    .marquee-item { white-space:nowrap; font-family:'Syne',sans-serif; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(13,27,46,0.4); display:flex; align-items:center; gap:60px; }
+    .marquee-item::after { content:'✦'; color:var(--accent); font-size:0.6rem; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* SECTIONS */
+    section { padding:120px 60px; }
+    .section-label { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+    .section-label::before { content:''; width:30px; height:1px; background:var(--accent); }
+    .section-title { font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:800; letter-spacing:-0.03em; line-height:1.05; margin-bottom:60px; }
+
+    /* SERVICES GRID */
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+    .service-card { background:#fff; padding:50px 40px; transition:background 0.3s; position:relative; overflow:hidden; }
+    .service-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(56,182,255,0.07) 0%,transparent 60%); opacity:0; transition:opacity 0.3s; }
+    .service-card:hover { background:#e8f4ff; }
+    .service-card:hover::before { opacity:1; }
+    .service-icon { width:52px; height:52px; border-radius:14px; background:var(--glass); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:28px; transition:border-color 0.3s; }
+    .service-card:hover .service-icon { border-color:var(--accent); background:rgba(56,182,255,0.1); }
+    .service-num { font-family:'Syne',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.1em; color:rgba(13,27,46,0.2); margin-bottom:14px; }
+    .service-card h3 { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:14px; }
+    .service-card p { font-size:0.9rem; line-height:1.7; color:rgba(13,27,46,0.5); }
+    .service-arrow { margin-top:30px; font-size:1.2rem; opacity:0; transform:translateX(-8px); transition:opacity 0.3s,transform 0.3s; color:var(--accent); }
+    .service-card:hover .service-arrow { opacity:1; transform:translateX(0); }
+
+    /* STATS */
+    .stats-wrap { background:var(--mid); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+    .stat-item { padding:60px 40px; border-right:1px solid var(--border); text-align:center; }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-family:'Syne',sans-serif; font-size:clamp(2.5rem,4vw,4rem); font-weight:800; letter-spacing:-0.04em; background:linear-gradient(135deg,var(--text) 0%,var(--accent2) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .stat-label { font-size:0.85rem; color:rgba(13,27,46,0.45); margin-top:8px; }
+
+    /* PROJECTS */
+    .projects-grid { display:grid; grid-template-columns:1.5fr 1fr; gap:20px; }
+    .project-card { border-radius:20px; position:relative; min-height:300px; background:#fff; border:1px solid var(--border); padding:40px; display:flex; flex-direction:column; justify-content:flex-end; transition:border-color 0.3s; overflow:hidden; }
+    .project-card:hover { border-color:rgba(56,182,255,0.5); }
+    .pcbg { position:absolute; inset:0; opacity:0.15; transition:opacity 0.4s; }
+    .project-card:hover .pcbg { opacity:0.28; }
+    .pc1 .pcbg { background:radial-gradient(ellipse at 80% 20%,#38b6ff 0%,transparent 60%); }
+    .pc2 .pcbg { background:radial-gradient(ellipse at 20% 80%,#0077cc 0%,transparent 60%); }
+    .pc3 .pcbg { background:radial-gradient(ellipse at 50% 50%,#7dd3fc 0%,transparent 60%); }
+    .project-tag { display:inline-block; background:var(--glass); border:1px solid var(--border); padding:5px 14px; border-radius:100px; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(13,27,46,0.45); margin-bottom:20px; }
+    .project-card h3 { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; letter-spacing:-0.03em; line-height:1.1; margin-bottom:10px; }
+    .project-card p { font-size:0.88rem; color:rgba(13,27,46,0.45); line-height:1.6; }
+    .project-link { position:absolute; top:30px; right:30px; width:42px; height:42px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:rgba(13,27,46,0.35); transition:all 0.3s; }
+    .project-card:hover .project-link { background:var(--accent); border-color:var(--accent); color:#0d1b2e; transform:rotate(45deg); }
+    .projects-right { display:flex; flex-direction:column; gap:20px; }
+
+    /* PROCESS */
+    .process-wrap { background:var(--mid); padding:120px 60px; }
+    .process-steps { display:grid; grid-template-columns:repeat(4,1fr); }
+    .step { padding:40px; border-right:1px solid var(--border); }
+    .step:last-child { border-right:none; }
+    .step-num { font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; color:rgba(13,27,46,0.07); line-height:1; margin-bottom:24px; }
+    .step-dot { width:8px; height:8px; background:var(--accent); border-radius:50%; margin-bottom:20px; }
+    .step h4 { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:12px; }
+    .step p { font-size:0.85rem; color:rgba(13,27,46,0.45); line-height:1.7; }
+
+    /* POPUP */
+    .popup-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.5); backdrop-filter:blur(6px); z-index:9000; align-items:center; justify-content:center; padding:20px; }
+    .popup-box { background:white; border-radius:24px; padding:40px; max-width:560px; width:100%; position:relative; border:1.5px solid rgba(56,182,255,0.2); box-shadow:0 30px 80px rgba(13,27,46,0.2); animation:popIn 0.4s cubic-bezier(0.23,1,0.32,1); }
+    @keyframes popIn { from{opacity:0;transform:scale(0.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    .popup-close { position:absolute; top:16px; right:16px; background:#f0f7ff; border:none; width:34px; height:34px; border-radius:50%; font-size:0.85rem; color:rgba(13,27,46,0.5); cursor:none; transition:background 0.2s; }
+    .popup-close:hover { background:var(--mid); }
+    .popup-badge { display:inline-block; background:#ebf6ff; color:#0077cc; font-size:0.75rem; font-weight:600; letter-spacing:0.05em; padding:5px 14px; border-radius:100px; margin-bottom:14px; }
+    .popup-box h3 { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:#0d1b2e; letter-spacing:-0.03em; margin-bottom:6px; }
+    .popup-sub { font-size:0.88rem; color:rgba(13,27,46,0.45); margin-bottom:24px; }
+    .popup-products { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
+    .popup-product { display:flex; align-items:center; gap:14px; padding:14px 16px; background:#f8fbff; border-radius:14px; border:1px solid rgba(56,182,255,0.12); }
+    .pp-icon { font-size:1.3rem; flex-shrink:0; }
+    .pp-info { flex:1; display:flex; flex-direction:column; }
+    .pp-name { font-weight:600; font-size:0.9rem; color:#0d1b2e; }
+    .pp-desc { font-size:0.78rem; color:rgba(13,27,46,0.45); }
+    .pp-price { display:flex; flex-direction:column; align-items:flex-end; }
+    .pp-old { font-size:0.75rem; color:rgba(13,27,46,0.3); text-decoration:line-through; }
+    .pp-new { font-size:1rem; font-weight:700; color:var(--accent2); }
+    .popup-cta { display:block; text-align:center; margin-bottom:12px; }
+    .popup-expire { text-align:center; font-size:0.78rem; color:rgba(13,27,46,0.35); }
+
+    /* FORM */
+    #inscription { background:#fff; }
+    .form-layout { display:grid; grid-template-columns:1fr 1.6fr; gap:60px; align-items:start; }
+    .form-intro { font-size:1rem; color:rgba(13,27,46,0.55); line-height:1.7; margin-bottom:30px; }
+    .form-features { display:flex; flex-direction:column; gap:14px; }
+    .form-feat { display:flex; align-items:center; gap:12px; font-size:0.9rem; color:rgba(13,27,46,0.65); font-weight:500; }
+    .form-box { background:white; border-radius:20px; padding:40px; border:1.5px solid rgba(56,182,255,0.15); box-shadow:0 8px 40px rgba(56,182,255,0.06); display:flex; flex-direction:column; gap:18px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-group { display:flex; flex-direction:column; gap:6px; }
+    .form-group label { font-size:0.8rem; font-weight:600; color:rgba(13,27,46,0.6); letter-spacing:0.02em; }
+    .form-group input, .form-group select, .form-group textarea { border:1.5px solid rgba(56,182,255,0.2); border-radius:10px; padding:12px 16px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,182,255,0.1); background:white; }
+    .form-group textarea { min-height:110px; resize:vertical; }
+    .submit-btn { background:linear-gradient(135deg,#38b6ff 0%,#0077cc 100%); color:white; border:none; padding:16px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:500; cursor:none; transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s; }
+    .submit-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(56,182,255,0.3); }
+    .submit-btn:disabled { opacity:0.6; }
+    .form-success { display:none; background:#ebf6ff; border:1.5px solid rgba(56,182,255,0.3); border-radius:12px; padding:16px; font-size:0.9rem; color:#0077cc; font-weight:500; text-align:center; }
+
+    /* CTA */
+    .cta-wrap { text-align:center; padding:160px 60px; position:relative; overflow:hidden; }
+    .cta-wrap::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(56,182,255,0.12) 0%,transparent 70%); }
+    .cta-wrap h2 { font-family:'Syne',sans-serif; font-size:clamp(2.5rem,5vw,5rem); font-weight:800; letter-spacing:-0.04em; line-height:1; margin-bottom:30px; }
+    .cta-wrap h2 span { color:var(--accent); }
+    .cta-wrap p { font-size:1rem; color:rgba(13,27,46,0.45); max-width:400px; margin:0 auto 50px; line-height:1.7; }
+
+    /* FOOTER */
+    footer { background:#0d1b2e; color:white; }
+    .footer-top { display:grid; grid-template-columns:1.4fr 2fr; gap:60px; padding:60px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .f-logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:-0.05em; color:white; display:flex; align-items:baseline; margin-bottom:10px; }
+    .f-logo .dot { color:var(--accent); font-size:1.5rem; line-height:0; margin:0 2px; }
+    .f-logo .vsuffix { font-size:0.82rem; margin-left:5px; color:rgba(255,255,255,0.35); font-weight:500; }
+    .f-tagline { font-size:0.85rem; color:rgba(255,255,255,0.35); margin-bottom:28px; }
+    .f-contact { display:flex; flex-direction:column; gap:12px; }
+    .fci { display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.55); }
+    .fci a { color:var(--accent); text-decoration:none; }
+    .fci a:hover { text-decoration:underline; }
+    .footer-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+    .footer-col { display:flex; flex-direction:column; gap:10px; }
+    .footer-col-title { font-family:'Syne',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:6px; }
+    .footer-col a { color:rgba(255,255,255,0.55); text-decoration:none; font-size:0.88rem; transition:color 0.2s; }
+    .footer-col a:hover { color:var(--accent); }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding:24px 60px; }
+    .footer-bottom p { font-size:0.8rem; color:rgba(255,255,255,0.25); }
+    .footer-socials { display:flex; gap:24px; }
+    .footer-socials a { color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.8rem; transition:color 0.2s; }
+    .footer-socials a:hover { color:white; }
+
+    /* ADMIN BUTTON */
+    .admin-btn { position:fixed; bottom:24px; right:24px; z-index:600; background:#0d1b2e; color:white; border:none; padding:12px 22px; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:500; cursor:none; display:flex; align-items:center; gap:8px; box-shadow:0 8px 30px rgba(13,27,46,0.25); transition:transform 0.2s; }
+    .admin-btn:hover { transform:translateY(-2px); }
+
+    /* ADMIN PANEL */
+    .admin-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.6); backdrop-filter:blur(8px); z-index:8000; align-items:center; justify-content:center; padding:20px; }
+    .admin-panel { background:white; border-radius:24px; width:100%; max-width:800px; max-height:90vh; overflow-y:auto; box-shadow:0 40px 100px rgba(13,27,46,0.3); }
+    .admin-header { display:flex; align-items:center; justify-content:space-between; padding:28px 36px; border-bottom:1px solid rgba(56,182,255,0.15); position:sticky; top:0; background:white; z-index:10; border-radius:24px 24px 0 0; }
+    .admin-header h2 { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:#0d1b2e; }
+    .admin-tabs { display:flex; gap:6px; padding:18px 36px 0; border-bottom:1px solid rgba(56,182,255,0.1); flex-wrap:wrap; }
+    .admin-tab { padding:10px 18px; border-radius:100px 100px 0 0; font-size:0.82rem; font-weight:600; border:none; background:transparent; color:rgba(13,27,46,0.4); cursor:none; transition:all 0.2s; border-bottom:2px solid transparent; }
+    .admin-tab.active { color:var(--accent2); border-bottom-color:var(--accent2); background:rgba(56,182,255,0.05); }
+    .admin-body { padding:28px 36px 36px; }
+    .admin-section { display:none; }
+    .admin-section.active { display:block; }
+    .admin-field { margin-bottom:16px; }
+    .admin-field label { display:block; font-size:0.78rem; font-weight:600; color:rgba(13,27,46,0.5); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:6px; }
+    .admin-field input, .admin-field textarea { width:100%; border:1.5px solid rgba(56,182,255,0.2); border-radius:10px; padding:11px 14px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s; }
+    .admin-field input:focus, .admin-field textarea:focus { border-color:var(--accent); background:white; }
+    .admin-field textarea { min-height:70px; resize:vertical; }
+    .ag2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .admin-card { background:#f8fbff; border:1px solid rgba(56,182,255,0.15); border-radius:14px; padding:18px; margin-bottom:14px; }
+    .admin-card-title { font-family:'Syne',sans-serif; font-size:0.8rem; font-weight:700; color:#0d1b2e; margin-bottom:14px; letter-spacing:0.05em; text-transform:uppercase; }
+    .admin-save { width:100%; background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; border:none; padding:14px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:500; cursor:none; margin-top:6px; transition:transform 0.2s,box-shadow 0.2s; }
+    .admin-save:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(56,182,255,0.3); }
+    .admin-close { background:#f0f7ff; border:none; width:36px; height:36px; border-radius:50%; font-size:1rem; color:rgba(13,27,46,0.5); cursor:none; transition:background 0.2s; }
+    .admin-close:hover { background:var(--mid); }
+    .toast { position:fixed; bottom:80px; right:24px; background:#0d1b2e; color:white; padding:12px 22px; border-radius:100px; font-size:0.85rem; font-weight:500; z-index:9999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; }
+    .toast.show { opacity:1; transform:translateY(0); }
+
+    /* ADMIN PASSWORD MODAL */
+    .pwd-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.65); backdrop-filter:blur(8px); z-index:9000; align-items:center; justify-content:center; }
+    .pwd-box { background:white; border-radius:20px; padding:40px 36px; max-width:380px; width:100%; box-shadow:0 40px 80px rgba(13,27,46,0.25); text-align:center; }
+    .pwd-box h3 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#0d1b2e; margin-bottom:8px; }
+    .pwd-box p { font-size:0.85rem; color:rgba(13,27,46,0.45); margin-bottom:24px; }
+    .pwd-box input { width:100%; border:1.5px solid rgba(56,182,255,0.3); border-radius:10px; padding:12px 14px; font-family:'DM Sans',sans-serif; font-size:0.95rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s; margin-bottom:12px; box-sizing:border-box; }
+    .pwd-box input:focus { border-color:var(--accent); background:white; }
+    .pwd-error { color:#e05555; font-size:0.82rem; margin-bottom:10px; min-height:18px; }
+    .pwd-actions { display:flex; gap:10px; margin-top:4px; }
+    .pwd-actions button { flex:1; padding:12px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600; border:none; cursor:pointer; transition:all 0.2s; }
+    .pwd-confirm { background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; }
+    .pwd-confirm:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(56,182,255,0.35); }
+    .pwd-cancel { background:#f0f7ff; color:rgba(13,27,46,0.6); }
+    .pwd-cancel:hover { background:#e2edf8; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:900px){
+      nav{padding:20px 24px;} .nav-links{display:none;} section{padding:80px 24px;}
+      .hero{padding:120px 24px 60px;} .services-grid{grid-template-columns:1fr;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);} .projects-grid{grid-template-columns:1fr;}
+      .process-steps{grid-template-columns:repeat(2,1fr);} .process-wrap{padding:80px 24px;}
+      .form-layout{grid-template-columns:1fr;gap:30px;} .form-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;gap:40px;padding:40px 24px;}
+      .footer-cols{grid-template-columns:repeat(2,1fr);} .footer-bottom{flex-direction:column;gap:12px;padding:20px 24px;}
+      .ag2{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="logo">M<span class="dot">·</span>V<span class="vsuffix">ision</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#inscription">Commander</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('inscription').scrollIntoView({behavior:'smooth'})">Démarrer un projet</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Agence Tech & Digital</div>
+  <h1>Nous créons<br/>des <em>apps</em> qui<br/><span class="hl">changent</span> tout</h1>
+  <p class="hero-sub">Media Vision conçoit et développe des applications mobiles, web et des solutions tech sur-mesure pour propulser votre business.</p>
+  <div class="hero-actions">
+    <a href="#projets" class="btn-primary">Voir nos projets</a>
+    <a href="#services" class="btn-ghost">Nos services</a>
+  </div>
+</section>
+
+<div class="marquee-wrap"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<section id="services">
+  <div class="section-label">Ce que nous faisons</div>
+  <h2 class="section-title reveal">Des solutions<br/>tech complètes</h2>
+  <div class="services-grid reveal" id="servicesGrid"></div>
+</section>
+
+<div class="stats-wrap">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-num">120+</div><div class="stat-label">Projets livrés</div></div>
+    <div class="stat-item reveal"><div class="stat-num">98%</div><div class="stat-label">Clients satisfaits</div></div>
+    <div class="stat-item reveal"><div class="stat-num">5M+</div><div class="stat-label">Utilisateurs actifs</div></div>
+    <div class="stat-item reveal"><div class="stat-num">8 ans</div><div class="stat-label">D'expertise tech</div></div>
+  </div>
+</div>
+
+<section id="projets">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-title reveal">Projets récents</h2>
+  <div class="projects-grid reveal" id="projectsGrid"></div>
+</section>
+
+<div class="process-wrap" id="process">
+  <div class="section-label">Comment on travaille</div>
+  <h2 class="section-title reveal">Notre process,<br/>étape par étape</h2>
+  <div class="process-steps reveal">
+    <div class="step"><div class="step-num">01</div><div class="step-dot"></div><h4>Découverte</h4><p>On analyse vos besoins, objectifs et contraintes lors d'un atelier de cadrage approfondi.</p></div>
+    <div class="step"><div class="step-num">02</div><div class="step-dot"></div><h4>Design & Prototype</h4><p>Wireframes, maquettes UI et prototype interactif pour valider le concept avant développement.</p></div>
+    <div class="step"><div class="step-num">03</div><div class="step-dot"></div><h4>Développement</h4><p>Sprints agiles, code reviewé, tests automatisés. Vous suivez l'avancement en temps réel.</p></div>
+    <div class="step"><div class="step-num">04</div><div class="step-dot"></div><h4>Lancement & Suivi</h4><p>Déploiement, formation et maintenance continue. On reste à vos côtés après la mise en ligne.</p></div>
+  </div>
+</div>
+
+<!-- POPUP PROMO -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <button class="popup-close" id="popupClose">✕</button>
+    <div class="popup-badge" id="popupBadge"></div>
+    <h3 id="popupTitle"></h3>
+    <p class="popup-sub" id="popupSub"></p>
+    <div class="popup-products" id="popupProducts"></div>
+    <a href="#inscription" class="btn-primary popup-cta" id="popupCta" onclick="closePopup()"></a>
+    <p class="popup-expire" id="popupExpire"></p>
+  </div>
+</div>
+
+<!-- FORMULAIRE INSCRIPTION -->
+<section id="inscription">
+  <div class="section-label">Passer commande</div>
+  <h2 class="section-title reveal">Démarrez votre<br/>projet avec nous</h2>
+  <div class="form-layout reveal">
+    <div>
+      <p class="form-intro">Remplissez le formulaire et nous vous recontactons sous 24h pour discuter de votre projet.</p>
+      <div class="form-features">
+        <div class="form-feat">✅ Devis gratuit et sans engagement</div>
+        <div class="form-feat">⚡ Réponse sous 24h garantie</div>
+        <div class="form-feat">🔒 Vos données sont protégées (RGPD)</div>
+        <div class="form-feat">🎯 Accompagnement personnalisé</div>
+      </div>
+    </div>
+    <form class="form-box" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact"/>
+      <p style="display:none"><input name="bot-field"/></p>
+      <div class="form-row">
+        <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" placeholder="Jean" required/></div>
+        <div class="form-group"><label>Nom *</label><input type="text" name="nom" placeholder="Dupont" required/></div>
+      </div>
+      <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="jean.dupont@email.com" required/></div>
+      <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+33 6 00 00 00 00"/></div>
+      <div class="form-group"><label>Service souhaité *</label><select id="formServices" name="service" required></select></div>
+      <div class="form-group">
+        <label>Budget estimé</label>
+        <select name="budget">
+          <option>Sélectionner...</option><option>Moins de 1 000 €</option><option>1 000 € – 5 000 €</option>
+          <option>5 000 € – 15 000 €</option><option>15 000 € – 50 000 €</option><option>Plus de 50 000 €</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Décrivez votre projet *</label><textarea name="projet" placeholder="Vos objectifs, délais, détails..." required></textarea></div>
+      <button class="submit-btn" type="submit" id="submitBtn">Envoyer ma demande →</button>
+      <div class="form-success" id="formSuccess">🎉 Merci ! Votre demande a bien été envoyée. Nous vous recontactons sous 24h.</div>
+    </form>
+  </div>
+</section>
+
+<div class="cta-wrap" id="contact">
+  <h2 class="reveal">Prêt à construire<br/><span>quelque chose</span><br/>d'incroyable ?</h2>
+  <p class="reveal">Parlons de votre projet. Un call de 30 minutes suffit pour démarrer.</p>
+  <a href="#inscription" class="btn-primary reveal">Démarrer maintenant →</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="f-logo">M<span class="dot">·</span>V<span class="vsuffix">ision</span></div>
+      <p class="f-tagline">Votre partenaire tech & digital</p>
+      <div class="f-contact">
+        <div class="fci">📍 <span id="fAddress"></span></div>
+        <div class="fci">✉️ <a id="fEmail" href="#"></a></div>
+        <div class="fci">📞 <span id="fPhone"></span></div>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><span class="footer-col-title">Services</span><div id="fServices"></div></div>
+      <div class="footer-col"><span class="footer-col-title">Entreprise</span><a href="#">À propos</a><a href="#">Blog</a><a href="#">Carrières</a><a href="#">Contact</a></div>
+      <div class="footer-col"><span class="footer-col-title">Légal</span><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p id="fCopy"></p>
+    <div class="footer-socials"><a href="#">LinkedIn</a><a href="#">Twitter</a><a href="#">GitHub</a><a href="#">Dribbble</a></div>
+  </div>
+</footer>
+
+<!-- BOUTON ADMIN -->
+<button class="admin-btn" onclick="openAdmin()">⚙️ Administration</button>
+
+<!-- MOT DE PASSE ADMIN -->
+<div class="pwd-overlay" id="pwdOverlay">
+  <div class="pwd-box">
+    <h3>🔐 Accès Administration</h3>
+    <p>Entrez le mot de passe administrateur pour continuer.</p>
+    <input type="password" id="pwdInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPwd()"/>
+    <div class="pwd-error" id="pwdError"></div>
+    <div class="pwd-actions">
+      <button class="pwd-cancel" onclick="closePwd()">Annuler</button>
+      <button class="pwd-confirm" onclick="checkPwd()">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANNEAU ADMIN -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>⚙️ Panneau d'administration</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="contact">📍 Contact</button>
+      <button class="admin-tab" data-tab="promo">🎉 Popup promo</button>
+      <button class="admin-tab" data-tab="produits">📦 Produits</button>
+      <button class="admin-tab" data-tab="services">🛠 Services</button>
+      <button class="admin-tab" data-tab="projets">💼 Projets</button>
+    </div>
+    <div class="admin-body">
+
+      <div class="admin-section active" id="tab-contact">
+        <div class="admin-field"><label>Adresse physique</label><input id="a-addr"/></div>
+        <div class="ag2">
+          <div class="admin-field"><label>Email</label><input id="a-email" type="email"/></div>
+          <div class="admin-field"><label>Téléphone</label><input id="a-phone"/></div>
+        </div>
+        <div class="admin-field"><label>Texte copyright</label><input id="a-copy"/></div>
+        <button class="admin-save" onclick="saveContact()">💾 Sauvegarder les coordonnées</button>
+      </div>
+
+      <div class="admin-section" id="tab-promo">
+        <div class="ag2">
+          <div class="admin-field"><label>Badge (ex: 🎉 Offre Spéciale)</label><input id="p-badge"/></div>
+          <div class="admin-field"><label>Date expiration</label><input id="p-expire"/></div>
+        </div>
+        <div class="admin-field"><label>Titre de la popup</label><input id="p-title"/></div>
+        <div class="admin-field"><label>Sous-titre</label><input id="p-sub"/></div>
+        <div class="admin-field"><label>Texte du bouton</label><input id="p-cta"/></div>
+        <button class="admin-save" onclick="savePopup()">💾 Sauvegarder la popup</button>
+      </div>
+
+      <div class="admin-section" id="tab-produits">
+        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Produits affichés dans la fenêtre promotionnelle.</p>
+        <div id="adminProduits"></div>
+        <button class="admin-save" onclick="saveProducts()">💾 Sauvegarder les produits</button>
+      </div>
+
+      <div class="admin-section" id="tab-services">
+        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Services affichés sur le site et dans le formulaire de commande.</p>
+        <div id="adminServices"></div>
+        <button class="admin-save" onclick="saveServices()">💾 Sauvegarder les services</button>
+      </div>
+
+      <div class="admin-section" id="tab-projets">
+        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Les 3 projets affichés dans la section portfolio.</p>
+        <div id="adminProjets"></div>
+        <button class="admin-save" onclick="saveProjects()">💾 Sauvegarder les projets</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ Modifications sauvegardées !</div>
+
+<script>
+// ======================================================
+//  CONFIG CENTRALE — modifiable via le panneau admin
+// ======================================================
+const DEFAULT_CONFIG = {
+  contact: {
+    address: "12 Rue de l'Innovation, 75008 Paris, France",
+    email: "hello@mediavision.tech",
+    phone: "243856373707",
+    copy: "© 2026 MediaVision. Tous droits réservés."
+  },
+  popup: {
+    badge: "🎉 Offre Spéciale",
+    title: "Nos Produits & Services",
+    sub: "Découvrez nos solutions tech à prix préférentiels ce mois-ci",
+    cta: "Je passe commande →",
+    expire: "⏳ Offre valable jusqu'au 31 décembre 2026"
+  },
+  products: [
+    { icon:"📱", name:"App Mobile Starter", desc:"Application iOS & Android sur-mesure", oldPrice:"2 500 €", newPrice:"1 990 €" },
+    { icon:"🌐", name:"Site Web Pro", desc:"Site vitrine ou e-commerce complet", oldPrice:"1 200 €", newPrice:"890 €" },
+    { icon:"🤖", name:"Intégration IA", desc:"Chatbot & automatisation intelligente", oldPrice:"800 €", newPrice:"590 €" }
+  ],
+  services: [
+    { icon:"📱", title:"Apps Mobiles", desc:"iOS & Android natifs ou cross-platform avec Flutter et React Native. Des expériences fluides et performantes." },
+    { icon:"🌐", title:"Applications Web", desc:"Plateformes SaaS, dashboards, e-commerce et sites web haute performance. Stack moderne, scalable." },
+    { icon:"🤖", title:"Intelligence Artificielle", desc:"Intégration d'IA dans vos produits : chatbots, automatisation, recommandations et analyse de données." },
+    { icon:"🎨", title:"UI / UX Design", desc:"Interfaces intuitives, identités digitales mémorables et expériences utilisateurs centrées sur la conversion." },
+    { icon:"☁️", title:"Cloud & Infrastructure", desc:"Architecture cloud, CI/CD, DevOps et solutions hébergement robustes pour une disponibilité maximale." },
+    { icon:"🔒", title:"Sécurité & Audit", desc:"Audit de sécurité, tests d'intrusion, conformité RGPD et protection de vos données." }
+  ],
+  projects: [
+    { tag:"Application Mobile", title:"FinTrack Pro", desc:"Application de gestion financière personnelle avec IA prédictive pour 800K+ utilisateurs." },
+    { tag:"Plateforme SaaS", title:"DataSync Cloud", desc:"Synchronisation de données en temps réel pour équipes distribuées." },
+    { tag:"E-commerce & IA", title:"ShopSense", desc:"Moteur de recommandation IA pour boutiques en ligne." }
+  ]
+};
+
+let C = JSON.parse(localStorage.getItem('mv-config') || JSON.stringify(DEFAULT_CONFIG));
+
+// ========== RENDER ==========
+
+function renderAll() {
+  renderMarquee(); renderServices(); renderProjects();
+  renderPopupContent(); renderContact(); renderFormServices(); renderFooterServices();
+}
+
+function renderMarquee() {
+  const items = C.services.map(s=>s.title);
+  const doubled = [...items,...items,...items,...items];
+  document.getElementById('marqueeTrack').innerHTML = doubled.map(t=>`<div class="marquee-item">${t}</div>`).join('');
+}
+
+function renderServices() {
+  document.getElementById('servicesGrid').innerHTML = C.services.map((s,i)=>`
+    <div class="service-card">
+      <div class="service-icon">${s.icon}</div>
+      <div class="service-num">0${i+1}</div>
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
+      <div class="service-arrow">→</div>
+    </div>`).join('');
+}
+
+function renderProjects() {
+  const cls = ['pc1','pc2','pc3'];
+  const cards = C.projects.map((p,i)=>`
+    <div class="project-card ${cls[i]||'pc1'}">
+      <div class="pcbg"></div>
+      <div class="project-link">↗</div>
+      <div class="project-tag">${p.tag}</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+    </div>`);
+  document.getElementById('projectsGrid').innerHTML = `
+    ${cards[0]}
+    <div class="projects-right">${cards[1]||''}${cards[2]||''}</div>`;
+}
+
+function renderPopupContent() {
+  const p = C.popup;
+  document.getElementById('popupBadge').textContent = p.badge;
+  document.getElementById('popupTitle').textContent = p.title;
+  document.getElementById('popupSub').textContent   = p.sub;
+  document.getElementById('popupCta').textContent   = p.cta;
+  document.getElementById('popupExpire').textContent = p.expire;
+  document.getElementById('popupProducts').innerHTML = C.products.map(pr=>`
+    <div class="popup-product">
+      <div class="pp-icon">${pr.icon}</div>
+      <div class="pp-info"><span class="pp-name">${pr.name}</span><span class="pp-desc">${pr.desc}</span></div>
+      <div class="pp-price"><span class="pp-old">${pr.oldPrice}</span><span class="pp-new">${pr.newPrice}</span></div>
+    </div>`).join('');
+}
+
+function renderContact() {
+  const c = C.contact;
+  document.getElementById('fAddress').textContent = c.address;
+  document.getElementById('fEmail').textContent   = c.email;
+  document.getElementById('fEmail').href          = 'mailto:'+c.email;
+  document.getElementById('fPhone').textContent   = c.phone;
+  document.getElementById('fCopy').textContent    = c.copy;
+}
+
+function renderFormServices() {
+  document.getElementById('formServices').innerHTML =
+    `<option>Choisir un service...</option>` +
+    C.services.map(s=>`<option>${s.title}</option>`).join('');
+}
+
+function renderFooterServices() {
+  document.getElementById('fServices').innerHTML =
+    C.services.map(s=>`<a href="#services">${s.title}</a>`).join('');
+}
+
+// ========== ADMIN PANEL ==========
+
+const ADMIN_PWD = 'Admin2026!';
+let adminUnlocked = false;
+
+function openAdmin() {
+  if (adminUnlocked) {
+    fillForms();
+    document.getElementById('adminOverlay').style.display='flex';
+  } else {
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdError').textContent = '';
+    document.getElementById('pwdOverlay').style.display='flex';
+    setTimeout(()=>document.getElementById('pwdInput').focus(),100);
+  }
+}
+function checkPwd() {
+  const val = document.getElementById('pwdInput').value;
+  if (val === ADMIN_PWD) {
+    adminUnlocked = true;
+    closePwd();
+    fillForms();
+    document.getElementById('adminOverlay').style.display='flex';
+  } else {
+    document.getElementById('pwdError').textContent = '❌ Mot de passe incorrect.';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+function closePwd() { document.getElementById('pwdOverlay').style.display='none'; }
+function closeAdmin() { document.getElementById('adminOverlay').style.display='none'; }
+function closePopup()  { document.getElementById('popupOverlay').style.display='none'; }
+
+document.getElementById('adminOverlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('adminOverlay')) closeAdmin();
+});
+document.getElementById('pwdOverlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('pwdOverlay')) closePwd();
+});
+
+// Tabs
+document.getElementById('adminTabs').addEventListener('click', e=>{
+  const btn = e.target.closest('.admin-tab');
+  if(!btn) return;
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+});
+
+function fillForms() {
+  // Contact
+  document.getElementById('a-addr').value  = C.contact.address;
+  document.getElementById('a-email').value = C.contact.email;
+  document.getElementById('a-phone').value = C.contact.phone;
+  document.getElementById('a-copy').value  = C.contact.copy;
+  // Popup
+  document.getElementById('p-badge').value  = C.popup.badge;
+  document.getElementById('p-title').value  = C.popup.title;
+  document.getElementById('p-sub').value    = C.popup.sub;
+  document.getElementById('p-cta').value    = C.popup.cta;
+  document.getElementById('p-expire').value = C.popup.expire;
+  // Products
+  document.getElementById('adminProduits').innerHTML = C.products.map((p,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-title">Produit ${i+1}</div>
+      <div class="ag2">
+        <div class="admin-field"><label>Icône</label><input data-p="${i}" data-k="icon" value="${p.icon}"/></div>
+        <div class="admin-field"><label>Nom</label><input data-p="${i}" data-k="name" value="${p.name}"/></div>
+      </div>
+      <div class="admin-field"><label>Description</label><input data-p="${i}" data-k="desc" value="${p.desc}"/></div>
+      <div class="ag2">
+        <div class="admin-field"><label>Ancien prix</label><input data-p="${i}" data-k="oldPrice" value="${p.oldPrice}"/></div>
+        <div class="admin-field"><label>Nouveau prix</label><input data-p="${i}" data-k="newPrice" value="${p.newPrice}"/></div>
+      </div>
+    </div>`).join('');
+  // Services
+  document.getElementById('adminServices').innerHTML = C.services.map((s,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-title">Service ${i+1}</div>
+      <div class="ag2">
+        <div class="admin-field"><label>Icône</label><input data-s="${i}" data-k="icon" value="${s.icon}"/></div>
+        <div class="admin-field"><label>Titre</label><input data-s="${i}" data-k="title" value="${s.title}"/></div>
+      </div>
+      <div class="admin-field"><label>Description</label><textarea data-s="${i}" data-k="desc">${s.desc}</textarea></div>
+    </div>`).join('');
+  // Projets
+  document.getElementById('adminProjets').innerHTML = C.projects.map((p,i)=>`
+    <div class="admin-card">
+      <div class="admin-card-title">Projet ${i+1}</div>
+      <div class="ag2">
+        <div class="admin-field"><label>Catégorie / Tag</label><input data-pr="${i}" data-k="tag" value="${p.tag}"/></div>
+        <div class="admin-field"><label>Titre</label><input data-pr="${i}" data-k="title" value="${p.title}"/></div>
+      </div>
+      <div class="admin-field"><label>Description</label><textarea data-pr="${i}" data-k="desc">${p.desc}</textarea></div>
+    </div>`).join('');
+}
+
+function saveContact() {
+  C.contact = { address:document.getElementById('a-addr').value, email:document.getElementById('a-email').value, phone:document.getElementById('a-phone').value, copy:document.getElementById('a-copy').value };
+  persist(); renderContact(); showToast();
+}
+function savePopup() {
+  C.popup = { badge:document.getElementById('p-badge').value, title:document.getElementById('p-title').value, sub:document.getElementById('p-sub').value, cta:document.getElementById('p-cta').value, expire:document.getElementById('p-expire').value };
+  persist(); renderPopupContent(); showToast();
+}
+function saveProducts() {
+  document.querySelectorAll('[data-p]').forEach(el=>{ C.products[el.dataset.p][el.dataset.k]=el.value; });
+  persist(); renderPopupContent(); showToast();
+}
+function saveServices() {
+  document.querySelectorAll('[data-s]').forEach(el=>{ C.services[el.dataset.s][el.dataset.k]=el.value; });
+  persist(); renderServices(); renderFormServices(); renderFooterServices(); renderMarquee(); showToast();
+}
+function saveProjects() {
+  document.querySelectorAll('[data-pr]').forEach(el=>{ C.projects[el.dataset.pr][el.dataset.k]=el.value; });
+  persist(); renderProjects(); showToast();
+}
+
+function persist()   { localStorage.setItem('mv-config', JSON.stringify(C)); }
+function showToast() {
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ========== CURSOR ==========
+const cursor=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px'; });
+(function loop(){ rx+=(mx-rx-20)*0.12; ry+=(my-ry-20)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.5)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; });
+});
+
+// ========== SCROLL & REVEAL ==========
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.background = window.scrollY>50?'rgba(240,247,255,0.98)':'rgba(240,247,255,0.85)';
+});
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// ========== POPUP ==========
+setTimeout(()=>{ document.getElementById('popupOverlay').style.display='flex'; },2500);
+document.getElementById('popupClose').addEventListener('click', closePopup);
+document.getElementById('popupOverlay').addEventListener('click',e=>{ if(e.target===document.getElementById('popupOverlay')) closePopup(); });
+
+// ========== FORM ==========
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(this)).toString(),
+    });
+    if (res.ok) {
+      btn.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      btn.textContent = 'Envoyer ma demande →';
+      btn.disabled = false;
+    }
+  } catch(_) {
+    btn.textContent = 'Envoyer ma demande →';
+    btn.disabled = false;
+  }
+});
+
+// ========== INIT ==========
+renderAll();
+</script>
+</body>
+</html>

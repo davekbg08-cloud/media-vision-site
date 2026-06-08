@@ -1,0 +1,9 @@
+{
+  "name": "media-vision",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site statique Media Vision",
+  "scripts": {
+    "dev": "python -m http.server 8080"
+  }
+}
