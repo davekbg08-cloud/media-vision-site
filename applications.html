@@ -348,34 +348,34 @@ const apps = [
     size: "18 Mo",
     icon: "📰",
     color: "#00C6FF",
-    playUrl: "https://play.google.com/store",
-    apkUrl: "#",
+    playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.news",
+    apkUrl: "/downloads/mediavision-news.apk",
     downloads: "10k+",
     rating: 4.7,
   },
   {
     name: "Vision Radio",
-    category: "Audio",
+    category: "Musique & Audio",
     desc: "Écoute nos radios en direct et nos podcasts exclusifs.",
     version: "v1.4.2",
     size: "12 Mo",
     icon: "📻",
     color: "#FF6B35",
-    playUrl: "https://play.google.com/store",
-    apkUrl: "#",
+    playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.radio",
+    apkUrl: "/downloads/vision-radio.apk",
     downloads: "5k+",
     rating: 4.5,
   },
   {
     name: "Vision TV",
-    category: "Streaming",
-    desc: "Regardez nos programmes, reportages et émissions en streaming.",
+    category: "Vidéo & TV",
+    desc: "Regardez nos programmes TV, reportages et émissions en streaming.",
     version: "v3.0.1",
     size: "24 Mo",
     icon: "📺",
     color: "#A855F7",
-    playUrl: "https://play.google.com/store",
-    apkUrl: "#",
+    playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.tv",
+    apkUrl: "/downloads/vision-tv.apk",
     downloads: "25k+",
     rating: 4.8,
   },
@@ -387,8 +387,8 @@ const apps = [
     size: "15 Mo",
     icon: "⚽",
     color: "#22C55E",
-    playUrl: "https://play.google.com/store",
-    apkUrl: "#",
+    playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.sport",
+    apkUrl: "/downloads/vision-sport.apk",
     downloads: "8k+",
     rating: 4.6,
   },
@@ -440,7 +440,7 @@ apps.forEach(app => {
       </div>
     </div>
     <div class="card-actions">
-      <a href="${app.playUrl}" target="_blank" class="btn btn-play">
+      <a href="${app.playUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-play">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3.18 23.76c.3.17.64.24.99.2l13.2-11.95-2.93-2.93L3.18 23.76zM20.7 10.26L17.44 8.4l-3.3 3 3.3 3.3 3.28-1.88c.93-.54.93-1.99-.02-2.56zM2.01 1.05C1.7 1.38 1.5 1.88 1.5 2.54v18.92c0 .66.2 1.16.52 1.49l.08.07 10.59-10.59v-.24L2.09.98l-.08.07zM14.07 7.32L3.18.24C2.83.02 2.5-.05 2.21.07l11.2 10.18 2.59-2.59-.09-.09-1.84-.25z"/>
         </svg>
