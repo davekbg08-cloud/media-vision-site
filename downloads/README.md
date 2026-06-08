@@ -8,3 +8,5 @@ Les liens actuels dans `applications.html` attendent ces fichiers :
 - `vision-radio.apk`
 - `vision-tv.apk`
 - `vision-sport.apk`
+
+Quand un fichier est ajouté, passe `apkAvailable` à `true` pour l'application correspondante dans `applications.html`.

@@ -16,7 +16,7 @@ La plupart des textes, produits, services, projets et coordonnées sont dans le 
 
 La liste des applications est dans le tableau `apps` à la fin de `applications.html`.
 
-Les liens APK pointent vers `downloads/`. Ajoute les fichiers APK avec les noms indiqués dans `applications.html` pour activer les téléchargements directs.
+Les fichiers APK doivent être ajoutés dans `downloads/`. Dans `applications.html`, passe `apkAvailable` à `true` pour chaque application dont le fichier APK est présent.
 
 Le site contient aussi un panneau d'administration côté navigateur. Ses changements sont enregistrés dans le `localStorage` du navigateur, pas dans GitHub. Pour rendre une modification permanente, il faut aussi l'écrire dans `index.html`.
 

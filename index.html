@@ -15,7 +15,7 @@
       --font-brand: 'Space Grotesk', var(--font-body);
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 400; line-height: 1.6; overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 400; line-height: 1.6; overflow-x: hidden; cursor: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
     /* CURSOR */
     .cursor { width:12px; height:12px; background:var(--accent); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transition:transform 0.15s; mix-blend-mode:difference; }
@@ -29,7 +29,7 @@
     .nav-links { display:flex; gap:36px; list-style:none; }
     .nav-links a { color:rgba(13,27,46,0.55); text-decoration:none; font-size:0.82rem; font-weight:600; letter-spacing:0; text-transform:uppercase; transition:color 0.3s; }
     .nav-links a:hover { color:var(--accent); }
-    .nav-cta { background:var(--accent); color:#0d1b2e; border:none; padding:10px 24px; border-radius:100px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.85rem; cursor:none; transition:transform 0.2s,box-shadow 0.2s; }
+    .nav-cta { background:var(--accent); color:#0d1b2e; border:none; padding:10px 24px; border-radius:100px; font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.85rem; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; }
     .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(56,182,255,0.3); }
 
     /* HERO */
@@ -96,7 +96,7 @@
     .project-tag { display:inline-block; background:var(--glass); border:1px solid var(--border); padding:5px 14px; border-radius:100px; font-size:0.72rem; letter-spacing:0; text-transform:uppercase; color:rgba(13,27,46,0.5); margin-bottom:20px; font-weight:700; }
     .project-card h3 { font-family:var(--font-display); font-size:1.5rem; font-weight:700; letter-spacing:0; line-height:1.15; margin-bottom:10px; }
     .project-card p { font-size:0.9rem; color:rgba(13,27,46,0.55); line-height:1.65; }
-    .project-link { position:absolute; top:30px; right:30px; width:42px; height:42px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:rgba(13,27,46,0.35); transition:all 0.3s; }
+    .project-link { position:absolute; top:30px; right:30px; width:42px; height:42px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:rgba(13,27,46,0.35); text-decoration:none; transition:all 0.3s; }
     .project-card:hover .project-link { background:var(--accent); border-color:var(--accent); color:#0d1b2e; transform:rotate(45deg); }
     .projects-right { display:flex; flex-direction:column; gap:20px; }
 
@@ -114,7 +114,7 @@
     .popup-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.5); backdrop-filter:blur(6px); z-index:9000; align-items:center; justify-content:center; padding:20px; }
     .popup-box { background:white; border-radius:24px; padding:40px; max-width:560px; width:100%; position:relative; border:1.5px solid rgba(56,182,255,0.2); box-shadow:0 30px 80px rgba(13,27,46,0.2); animation:popIn 0.4s cubic-bezier(0.23,1,0.32,1); }
     @keyframes popIn { from{opacity:0;transform:scale(0.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
-    .popup-close { position:absolute; top:16px; right:16px; background:#f0f7ff; border:none; width:34px; height:34px; border-radius:50%; font-size:0.85rem; color:rgba(13,27,46,0.5); cursor:none; transition:background 0.2s; }
+    .popup-close { position:absolute; top:16px; right:16px; background:#f0f7ff; border:none; width:34px; height:34px; border-radius:50%; font-size:0.85rem; color:rgba(13,27,46,0.5); cursor:pointer; transition:background 0.2s; }
     .popup-close:hover { background:var(--mid); }
     .popup-badge { display:inline-block; background:#ebf6ff; color:#0077cc; font-size:0.75rem; font-weight:700; letter-spacing:0; padding:5px 14px; border-radius:100px; margin-bottom:14px; }
     .popup-box h3 { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:#0d1b2e; letter-spacing:0; margin-bottom:6px; }
@@ -141,10 +141,11 @@
     .form-group input, .form-group select, .form-group textarea { border:1.5px solid rgba(56,182,255,0.2); border-radius:10px; padding:12px 16px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,182,255,0.1); background:white; }
     .form-group textarea { min-height:110px; resize:vertical; }
-    .submit-btn { background:linear-gradient(135deg,#38b6ff 0%,#0077cc 100%); color:white; border:none; padding:16px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:500; cursor:none; transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s; }
+    .submit-btn { background:linear-gradient(135deg,#38b6ff 0%,#0077cc 100%); color:white; border:none; padding:16px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:500; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s; }
     .submit-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(56,182,255,0.3); }
     .submit-btn:disabled { opacity:0.6; }
     .form-success { display:none; background:#ebf6ff; border:1.5px solid rgba(56,182,255,0.3); border-radius:12px; padding:16px; font-size:0.9rem; color:#0077cc; font-weight:500; text-align:center; }
+    .form-error { display:none; background:#fff4f4; border:1.5px solid rgba(224,85,85,0.25); border-radius:12px; padding:14px 16px; font-size:0.88rem; color:#b94a4a; font-weight:600; text-align:center; }
 
     /* CTA */
     .cta-wrap { text-align:center; padding:160px 60px; position:relative; overflow:hidden; }
@@ -181,7 +182,7 @@
     .admin-header { display:flex; align-items:center; justify-content:space-between; padding:28px 36px; border-bottom:1px solid rgba(56,182,255,0.15); position:sticky; top:0; background:white; z-index:10; border-radius:24px 24px 0 0; }
     .admin-header h2 { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:#0d1b2e; }
     .admin-tabs { display:flex; gap:6px; padding:18px 36px 0; border-bottom:1px solid rgba(56,182,255,0.1); flex-wrap:wrap; }
-    .admin-tab { padding:10px 18px; border-radius:100px 100px 0 0; font-size:0.82rem; font-weight:600; border:none; background:transparent; color:rgba(13,27,46,0.4); cursor:none; transition:all 0.2s; border-bottom:2px solid transparent; }
+    .admin-tab { padding:10px 18px; border-radius:100px 100px 0 0; font-size:0.82rem; font-weight:600; border:none; background:transparent; color:rgba(13,27,46,0.4); cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; }
     .admin-tab.active { color:var(--accent2); border-bottom-color:var(--accent2); background:rgba(56,182,255,0.05); }
     .admin-body { padding:28px 36px 36px; }
     .admin-section { display:none; }
@@ -194,9 +195,9 @@
     .ag2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .admin-card { background:#f8fbff; border:1px solid rgba(56,182,255,0.15); border-radius:14px; padding:18px; margin-bottom:14px; }
     .admin-card-title { font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:#0d1b2e; margin-bottom:14px; letter-spacing:0; text-transform:uppercase; }
-    .admin-save { width:100%; background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; border:none; padding:14px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:500; cursor:none; margin-top:6px; transition:transform 0.2s,box-shadow 0.2s; }
+    .admin-save { width:100%; background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; border:none; padding:14px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:500; cursor:pointer; margin-top:6px; transition:transform 0.2s,box-shadow 0.2s; }
     .admin-save:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(56,182,255,0.3); }
-    .admin-close { background:#f0f7ff; border:none; width:36px; height:36px; border-radius:50%; font-size:1rem; color:rgba(13,27,46,0.5); cursor:none; transition:background 0.2s; }
+    .admin-close { background:#f0f7ff; border:none; width:36px; height:36px; border-radius:50%; font-size:1rem; color:rgba(13,27,46,0.5); cursor:pointer; transition:background 0.2s; }
     .admin-close:hover { background:var(--mid); }
     .toast { position:fixed; bottom:80px; right:24px; background:#0d1b2e; color:white; padding:12px 22px; border-radius:100px; font-size:0.85rem; font-weight:500; z-index:9999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; }
     .toast.show { opacity:1; transform:translateY(0); }
@@ -221,7 +222,7 @@
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     @media(max-width:900px){
-      nav{padding:20px 24px;} .nav-links{display:none;} section{padding:80px 24px;}
+      nav{padding:20px 24px; flex-wrap:wrap; gap:14px;} .nav-links{display:flex; flex-wrap:wrap; gap:14px; width:100%; order:3;} .nav-links a{font-size:0.75rem;} section{padding:80px 24px;}
       .hero{padding:120px 24px 60px;} .services-grid{grid-template-columns:1fr;}
       .stats-grid{grid-template-columns:repeat(2,1fr);} .projects-grid{grid-template-columns:1fr;}
       .process-steps{grid-template-columns:repeat(2,1fr);} .process-wrap{padding:80px 24px;}
@@ -351,6 +352,7 @@
       <div class="form-group"><label>Décrivez votre projet *</label><textarea name="projet" placeholder="Vos objectifs, délais, détails..." required></textarea></div>
       <button class="submit-btn" type="submit" id="submitBtn">Envoyer ma demande →</button>
       <div class="form-success" id="formSuccess">🎉 Merci ! Votre demande a bien été envoyée. Nous vous recontactons sous 24h.</div>
+      <div class="form-error" id="formError">Le formulaire n'a pas pu être envoyé. Réessayez ou contactez-nous par email.</div>
     </form>
   </div>
 </section>
@@ -368,19 +370,19 @@
       <p class="f-tagline">Votre partenaire tech & digital</p>
       <div class="f-contact">
         <div class="fci">📍 <span id="fAddress"></span></div>
-        <div class="fci">✉️ <a id="fEmail" href="#"></a></div>
+        <div class="fci">✉️ <a id="fEmail" href="mailto:hello@mediavision.tech"></a></div>
         <div class="fci">📞 <span id="fPhone"></span></div>
       </div>
     </div>
     <div class="footer-cols">
       <div class="footer-col"><span class="footer-col-title">Services</span><div id="fServices"></div></div>
-      <div class="footer-col"><span class="footer-col-title">Entreprise</span><a href="#">À propos</a><a href="#">Blog</a><a href="#">Carrières</a><a href="#">Contact</a></div>
-      <div class="footer-col"><span class="footer-col-title">Légal</span><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a></div>
+      <div class="footer-col"><span class="footer-col-title">Entreprise</span><a href="#services">À propos</a><a href="applications.html">Applications</a><a href="#inscription">Projet</a><a href="#contact">Contact</a></div>
+      <div class="footer-col"><span class="footer-col-title">Légal</span><a href="mailto:hello@mediavision.tech?subject=Mentions%20legales">Mentions légales</a><a href="mailto:hello@mediavision.tech?subject=Conditions%20generales">CGV</a><a href="mailto:hello@mediavision.tech?subject=Confidentialite">Confidentialité</a></div>
     </div>
   </div>
   <div class="footer-bottom">
     <p id="fCopy"></p>
-    <div class="footer-socials"><a href="#">LinkedIn</a><a href="#">Twitter</a><a href="#">GitHub</a><a href="#">Dribbble</a></div>
+    <div class="footer-socials"><a href="https://github.com/davekbg08-cloud/desktop-tutorial" target="_blank" rel="noopener noreferrer">GitHub</a><a href="applications.html">Applications</a><a href="mailto:hello@mediavision.tech">Email</a></div>
   </div>
 </footer>
 
@@ -528,7 +530,7 @@ function renderProjects() {
   const cards = C.projects.map((p,i)=>`
     <div class="project-card ${cls[i]||'pc1'}">
       <div class="pcbg"></div>
-      <div class="project-link">↗</div>
+      <a class="project-link" href="#inscription" aria-label="Parler du projet ${p.title}">↗</a>
       <div class="project-tag">${p.tag}</div>
       <h3>${p.title}</h3>
       <p>${p.desc}</p>
@@ -722,6 +724,8 @@ document.getElementById('popupOverlay').addEventListener('click',e=>{ if(e.targe
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
+  const error = document.getElementById('formError');
+  error.style.display = 'none';
   btn.textContent = 'Envoi en cours...';
   btn.disabled = true;
   try {
@@ -736,10 +740,12 @@ document.getElementById('contactForm').addEventListener('submit', async function
     } else {
       btn.textContent = 'Envoyer ma demande →';
       btn.disabled = false;
+      error.style.display = 'block';
     }
   } catch(_) {
     btn.textContent = 'Envoyer ma demande →';
     btn.disabled = false;
+    error.style.display = 'block';
   }
 });
 

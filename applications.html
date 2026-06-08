@@ -304,8 +304,9 @@
 
   /* RESPONSIVE */
   @media (max-width: 640px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
+    nav { padding: 16px 20px; flex-wrap: wrap; gap: 14px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 14px; width: 100%; }
+    .nav-links a { font-size: 13px; }
     .apps-section { padding: 50px 20px; }
     .apps-grid { grid-template-columns: 1fr; }
     h1 { font-size: 2.35rem; }
@@ -361,6 +362,7 @@ const apps = [
     color: "#00C6FF",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.news",
     apkUrl: "/downloads/mediavision-news.apk",
+    apkAvailable: false,
     downloads: "10k+",
     rating: 4.7,
   },
@@ -374,6 +376,7 @@ const apps = [
     color: "#FF6B35",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.radio",
     apkUrl: "/downloads/vision-radio.apk",
+    apkAvailable: false,
     downloads: "5k+",
     rating: 4.5,
   },
@@ -387,6 +390,7 @@ const apps = [
     color: "#A855F7",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.tv",
     apkUrl: "/downloads/vision-tv.apk",
+    apkAvailable: false,
     downloads: "25k+",
     rating: 4.8,
   },
@@ -400,6 +404,7 @@ const apps = [
     color: "#22C55E",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.sport",
     apkUrl: "/downloads/vision-sport.apk",
+    apkAvailable: false,
     downloads: "8k+",
     rating: 4.6,
   },
@@ -457,17 +462,30 @@ apps.forEach(app => {
         </svg>
         Play Store
       </a>
-      <a href="${app.apkUrl}" download class="btn btn-apk">
+      ${app.apkAvailable ? `<a href="${app.apkUrl}" download class="btn btn-apk">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         APK Direct
-      </a>
+      </a>` : `<button type="button" class="btn btn-apk" data-apk-pending="${app.name}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        APK bientôt
+      </button>`}
     </div>
   `;
   grid.appendChild(card);
+});
+
+document.querySelectorAll('[data-apk-pending]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    alert(`L'APK de ${btn.dataset.apkPending} sera ajouté bientôt.`);
+  });
 });
 </script>
 </body>
