@@ -125,11 +125,8 @@
     .pp-info { flex:1; display:flex; flex-direction:column; }
     .pp-name { font-weight:600; font-size:0.9rem; color:#0d1b2e; }
     .pp-desc { font-size:0.78rem; color:rgba(13,27,46,0.45); }
-    .pp-price { display:flex; flex-direction:column; align-items:flex-end; }
-    .pp-old { font-size:0.75rem; color:rgba(13,27,46,0.3); text-decoration:line-through; }
-    .pp-new { font-size:1rem; font-weight:700; color:var(--accent2); }
     .popup-cta { display:block; text-align:center; margin-bottom:12px; }
-    .popup-expire { text-align:center; font-size:0.78rem; color:rgba(13,27,46,0.35); }
+    .popup-expire { text-align:center; font-size:0.78rem; color:rgba(13,27,46,0.42); }
 
     /* FORM */
     #inscription { background:#fff; }
@@ -257,14 +254,14 @@
     <li><a href="applications.html">Applications</a></li>
     <li><a href="#projets">Projets</a></li>
     <li><a href="#process">Process</a></li>
-    <li><a href="#inscription">Commander</a></li>
+    <li><a href="#inscription">Projet</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('inscription').scrollIntoView({behavior:'smooth'})">Démarrer un projet</button>
 </nav>
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-tag">Agence Tech & Digital</div>
+  <div class="hero-tag">Studio Tech & Digital</div>
   <h1>Nous créons<br/>des <em>apps</em> qui<br/><span class="hl">avancent</span> vite</h1>
   <p class="hero-sub">Media Vision conçoit des applications mobiles, des sites web et des solutions IA claires, rapides et prêtes à évoluer avec votre activité.</p>
   <div class="hero-actions">
@@ -322,7 +319,7 @@
 
 <!-- FORMULAIRE INSCRIPTION -->
 <section id="inscription">
-  <div class="section-label">Passer commande</div>
+  <div class="section-label">Parler de votre projet</div>
   <h2 class="section-title reveal">Lancez votre<br/>projet avec nous</h2>
   <div class="form-layout reveal">
     <div>
@@ -345,10 +342,10 @@
       <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+33 6 00 00 00 00"/></div>
       <div class="form-group"><label>Service souhaité *</label><select id="formServices" name="service" required></select></div>
       <div class="form-group">
-        <label>Budget estimé</label>
-        <select name="budget">
-          <option>Sélectionner...</option><option>Moins de 1 000 €</option><option>1 000 € – 5 000 €</option>
-          <option>5 000 € – 15 000 €</option><option>15 000 € – 50 000 €</option><option>Plus de 50 000 €</option>
+        <label>Niveau de projet</label>
+        <select name="project_level">
+          <option>Sélectionner...</option><option>Projet simple</option><option>Projet avancé</option>
+          <option>Projet complet</option><option>Accompagnement continu</option><option>À définir ensemble</option>
         </select>
       </div>
       <div class="form-group"><label>Décrivez votre projet *</label><textarea name="projet" placeholder="Vos objectifs, délais, détails..." required></textarea></div>
@@ -411,7 +408,7 @@
     <div class="admin-tabs" id="adminTabs">
       <button class="admin-tab active" data-tab="contact">📍 Contact</button>
       <button class="admin-tab" data-tab="promo">🎉 Popup promo</button>
-      <button class="admin-tab" data-tab="produits">📦 Produits</button>
+      <button class="admin-tab" data-tab="produits">📦 Solutions</button>
       <button class="admin-tab" data-tab="services">🛠 Services</button>
       <button class="admin-tab" data-tab="projets">💼 Projets</button>
     </div>
@@ -429,8 +426,8 @@
 
       <div class="admin-section" id="tab-promo">
         <div class="ag2">
-          <div class="admin-field"><label>Badge (ex: 🎉 Offre Spéciale)</label><input id="p-badge"/></div>
-          <div class="admin-field"><label>Date expiration</label><input id="p-expire"/></div>
+          <div class="admin-field"><label>Badge</label><input id="p-badge"/></div>
+          <div class="admin-field"><label>Mention complémentaire</label><input id="p-expire"/></div>
         </div>
         <div class="admin-field"><label>Titre de la popup</label><input id="p-title"/></div>
         <div class="admin-field"><label>Sous-titre</label><input id="p-sub"/></div>
@@ -439,13 +436,13 @@
       </div>
 
       <div class="admin-section" id="tab-produits">
-        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Produits affichés dans la fenêtre promotionnelle.</p>
+        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Solutions affichées dans la fenêtre de présentation.</p>
         <div id="adminProduits"></div>
         <button class="admin-save" onclick="saveProducts()">💾 Sauvegarder les produits</button>
       </div>
 
       <div class="admin-section" id="tab-services">
-        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Services affichés sur le site et dans le formulaire de commande.</p>
+        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Services affichés sur le site et dans le formulaire de projet.</p>
         <div id="adminServices"></div>
         <button class="admin-save" onclick="saveServices()">💾 Sauvegarder les services</button>
       </div>
@@ -474,16 +471,16 @@ const DEFAULT_CONFIG = {
     copy: "© 2026 MediaVision. Tous droits réservés."
   },
   popup: {
-    badge: "🎉 Offre Spéciale",
+    badge: "✨ Solutions Media Vision",
     title: "Solutions prêtes à lancer",
     sub: "Des offres claires pour démarrer rapidement votre projet digital.",
-    cta: "Je passe commande →",
-    expire: "⏳ Offre valable jusqu'au 31 décembre 2026"
+    cta: "Demander un échange →",
+    expire: "Conseil et devis personnalisés sur demande."
   },
   products: [
-    { icon:"📱", name:"App Mobile Starter", desc:"Application iOS et Android sur mesure", oldPrice:"2 500 €", newPrice:"1 990 €" },
-    { icon:"🌐", name:"Site Web Pro", desc:"Site vitrine ou e-commerce complet", oldPrice:"1 200 €", newPrice:"890 €" },
-    { icon:"🤖", name:"Intégration IA", desc:"Chatbot, automatisation et assistant intelligent", oldPrice:"800 €", newPrice:"590 €" }
+    { icon:"📱", name:"App Mobile Starter", desc:"Application iOS et Android sur mesure" },
+    { icon:"🌐", name:"Site Web Pro", desc:"Site vitrine ou e-commerce complet" },
+    { icon:"🤖", name:"Intégration IA", desc:"Chatbot, automatisation et assistant intelligent" }
   ],
   services: [
     { icon:"📱", title:"Apps Mobiles", desc:"Applications iOS et Android pensées pour une expérience fluide, rapide et fiable." },
@@ -552,7 +549,6 @@ function renderPopupContent() {
     <div class="popup-product">
       <div class="pp-icon">${pr.icon}</div>
       <div class="pp-info"><span class="pp-name">${pr.name}</span><span class="pp-desc">${pr.desc}</span></div>
-      <div class="pp-price"><span class="pp-old">${pr.oldPrice}</span><span class="pp-new">${pr.newPrice}</span></div>
     </div>`).join('');
 }
 
@@ -647,10 +643,6 @@ function fillForms() {
         <div class="admin-field"><label>Nom</label><input data-p="${i}" data-k="name" value="${p.name}"/></div>
       </div>
       <div class="admin-field"><label>Description</label><input data-p="${i}" data-k="desc" value="${p.desc}"/></div>
-      <div class="ag2">
-        <div class="admin-field"><label>Ancien prix</label><input data-p="${i}" data-k="oldPrice" value="${p.oldPrice}"/></div>
-        <div class="admin-field"><label>Nouveau prix</label><input data-p="${i}" data-k="newPrice" value="${p.newPrice}"/></div>
-      </div>
     </div>`).join('');
   // Services
   document.getElementById('adminServices').innerHTML = C.services.map((s,i)=>`
