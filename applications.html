@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Catalogue des applications Media Vision, avec accès Play Store ou APK direct dès disponibilité officielle."/>
+<meta name="theme-color" content="#050914"/>
+<meta property="og:title" content="Media Vision — Nos Applications"/>
+<meta property="og:description" content="Retrouvez les applications Media Vision et leurs liens de téléchargement lorsqu'elles sont disponibles."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://media-vision.netlify.app/applications.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <title>Media Vision — Nos Applications</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -243,6 +250,7 @@
   .card-actions {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
   }
 
   .btn {
@@ -266,6 +274,19 @@
 
   .btn:hover {
     transform: scale(1.02);
+  }
+
+  .btn-disabled {
+    opacity: .68;
+    cursor: not-allowed;
+    color: #64748b;
+    border-color: #1e293b;
+    background: #0b1220;
+  }
+
+  .btn-disabled:hover {
+    transform: none;
+    box-shadow: none;
   }
 
   .btn-play:hover {
@@ -309,6 +330,8 @@
     .nav-links a { font-size: 13px; }
     .apps-section { padding: 50px 20px; }
     .apps-grid { grid-template-columns: 1fr; }
+    .btn { flex: 1 1 100%; justify-content: center; }
+    .apk-note { align-items: flex-start; }
     h1 { font-size: 2.35rem; }
   }
 </style>
@@ -361,6 +384,7 @@ const apps = [
     icon: "📰",
     color: "#00C6FF",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.news",
+    playAvailable: false,
     apkUrl: "/downloads/mediavision-news.apk",
     apkAvailable: false,
     downloads: "10k+",
@@ -375,6 +399,7 @@ const apps = [
     icon: "📻",
     color: "#FF6B35",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.radio",
+    playAvailable: false,
     apkUrl: "/downloads/vision-radio.apk",
     apkAvailable: false,
     downloads: "5k+",
@@ -389,6 +414,7 @@ const apps = [
     icon: "📺",
     color: "#A855F7",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.tv",
+    playAvailable: false,
     apkUrl: "/downloads/vision-tv.apk",
     apkAvailable: false,
     downloads: "25k+",
@@ -403,6 +429,7 @@ const apps = [
     icon: "⚽",
     color: "#22C55E",
     playUrl: "https://play.google.com/store/apps/details?id=com.mediavision.sport",
+    playAvailable: false,
     apkUrl: "/downloads/vision-sport.apk",
     apkAvailable: false,
     downloads: "8k+",
@@ -425,6 +452,12 @@ function stars(rating) {
   return `<div class="stars">${s}<span class="rating-val">${rating}</span></div>`;
 }
 
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[ch]));
+}
+
 const grid = document.getElementById('appsGrid');
 
 apps.forEach(app => {
@@ -438,45 +471,54 @@ apps.forEach(app => {
   card.style.setProperty('--accent-border', hexToRgba(c, 0.3));
   card.style.setProperty('--accent-dark', hexToRgba(c, 0.8));
 
-  card.innerHTML = `
-    <div class="card-top">
-      <div class="app-icon">${app.icon}</div>
-      <div>
-        <div class="app-name">${app.name}</div>
-        <span class="app-cat">${app.category}</span>
-      </div>
-    </div>
-    <p class="app-desc">${app.desc}</p>
-    <div class="card-meta">
-      ${stars(app.rating)}
-      <div class="meta-right">
-        <span class="meta-tag">↓${app.downloads}</span>
-        <span class="meta-tag">${app.size}</span>
-        <span class="meta-tag">${app.version}</span>
-      </div>
-    </div>
-    <div class="card-actions">
-      <a href="${app.playUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-play">
+  const playAction = app.playAvailable ? `<a href="${escapeHtml(app.playUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-play">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3.18 23.76c.3.17.64.24.99.2l13.2-11.95-2.93-2.93L3.18 23.76zM20.7 10.26L17.44 8.4l-3.3 3 3.3 3.3 3.28-1.88c.93-.54.93-1.99-.02-2.56zM2.01 1.05C1.7 1.38 1.5 1.88 1.5 2.54v18.92c0 .66.2 1.16.52 1.49l.08.07 10.59-10.59v-.24L2.09.98l-.08.07zM14.07 7.32L3.18.24C2.83.02 2.5-.05 2.21.07l11.2 10.18 2.59-2.59-.09-.09-1.84-.25z"/>
         </svg>
         Play Store
-      </a>
-      ${app.apkAvailable ? `<a href="${app.apkUrl}" download class="btn btn-apk">
+      </a>` : `<button type="button" class="btn btn-play btn-disabled" aria-disabled="true" data-play-pending="${escapeHtml(app.name)}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3.18 23.76c.3.17.64.24.99.2l13.2-11.95-2.93-2.93L3.18 23.76zM20.7 10.26L17.44 8.4l-3.3 3 3.3 3.3 3.28-1.88c.93-.54.93-1.99-.02-2.56zM2.01 1.05C1.7 1.38 1.5 1.88 1.5 2.54v18.92c0 .66.2 1.16.52 1.49l.08.07 10.59-10.59v-.24L2.09.98l-.08.07zM14.07 7.32L3.18.24C2.83.02 2.5-.05 2.21.07l11.2 10.18 2.59-2.59-.09-.09-1.84-.25z"/>
+        </svg>
+        Play Store bientôt
+      </button>`;
+
+  const apkAction = app.apkAvailable ? `<a href="${escapeHtml(app.apkUrl)}" download class="btn btn-apk">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         APK Direct
-      </a>` : `<button type="button" class="btn btn-apk" data-apk-pending="${app.name}">
+      </a>` : `<button type="button" class="btn btn-apk" data-apk-pending="${escapeHtml(app.name)}">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
           <line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
         APK bientôt
-      </button>`}
+      </button>`;
+
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="app-icon">${escapeHtml(app.icon)}</div>
+      <div>
+        <div class="app-name">${escapeHtml(app.name)}</div>
+        <span class="app-cat">${escapeHtml(app.category)}</span>
+      </div>
+    </div>
+    <p class="app-desc">${escapeHtml(app.desc)}</p>
+    <div class="card-meta">
+      ${stars(app.rating)}
+      <div class="meta-right">
+        <span class="meta-tag">↓${escapeHtml(app.downloads)}</span>
+        <span class="meta-tag">${escapeHtml(app.size)}</span>
+        <span class="meta-tag">${escapeHtml(app.version)}</span>
+      </div>
+    </div>
+    <div class="card-actions">
+      ${playAction}
+      ${apkAction}
     </div>
   `;
   grid.appendChild(card);
@@ -485,6 +527,12 @@ apps.forEach(app => {
 document.querySelectorAll('[data-apk-pending]').forEach(btn => {
   btn.addEventListener('click', () => {
     alert(`L'APK de ${btn.dataset.apkPending} sera ajouté bientôt.`);
+  });
+});
+
+document.querySelectorAll('[data-play-pending]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    alert(`${btn.dataset.playPending} sera ajouté sur le Play Store dès disponibilité officielle.`);
   });
 });
 </script>

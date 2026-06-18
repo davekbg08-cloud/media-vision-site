@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Media Vision conçoit des sites web, applications mobiles, solutions IA et expériences digitales modernes pour entreprises, marques et projets ambitieux."/>
+  <meta name="theme-color" content="#f0f7ff"/>
+  <meta property="og:title" content="Media Vision — Création digitale & applications"/>
+  <meta property="og:description" content="Sites web, applications mobiles, IA, UI/UX, cloud et sécurité pour transformer vos idées en produits numériques fiables."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://media-vision.netlify.app/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
   <title>Media Vision — Création digitale & applications</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
   <style>
@@ -112,20 +119,20 @@
 
     /* POPUP */
     .popup-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.5); backdrop-filter:blur(6px); z-index:9000; align-items:center; justify-content:center; padding:20px; }
-    .popup-box { background:white; border-radius:24px; padding:40px; max-width:560px; width:100%; position:relative; border:1.5px solid rgba(56,182,255,0.2); box-shadow:0 30px 80px rgba(13,27,46,0.2); animation:popIn 0.4s cubic-bezier(0.23,1,0.32,1); }
+    .popup-box { background:white; border-radius:24px; padding:40px; max-width:min(560px, calc(100vw - 40px)); width:100%; min-width:0; position:relative; border:1.5px solid rgba(56,182,255,0.2); box-shadow:0 30px 80px rgba(13,27,46,0.2); animation:popIn 0.4s cubic-bezier(0.23,1,0.32,1); }
     @keyframes popIn { from{opacity:0;transform:scale(0.9) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
     .popup-close { position:absolute; top:16px; right:16px; background:#f0f7ff; border:none; width:34px; height:34px; border-radius:50%; font-size:0.85rem; color:rgba(13,27,46,0.5); cursor:pointer; transition:background 0.2s; }
     .popup-close:hover { background:var(--mid); }
     .popup-badge { display:inline-block; background:#ebf6ff; color:#0077cc; font-size:0.75rem; font-weight:700; letter-spacing:0; padding:5px 14px; border-radius:100px; margin-bottom:14px; }
-    .popup-box h3 { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:#0d1b2e; letter-spacing:0; margin-bottom:6px; }
+    .popup-box h3 { font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:#0d1b2e; letter-spacing:0; margin-bottom:6px; overflow-wrap:break-word; }
     .popup-sub { font-size:0.88rem; color:rgba(13,27,46,0.45); margin-bottom:24px; }
     .popup-products { display:flex; flex-direction:column; gap:12px; margin-bottom:24px; }
     .popup-product { display:flex; align-items:center; gap:14px; padding:14px 16px; background:#f8fbff; border-radius:14px; border:1px solid rgba(56,182,255,0.12); }
     .pp-icon { font-size:1.3rem; flex-shrink:0; }
-    .pp-info { flex:1; display:flex; flex-direction:column; }
-    .pp-name { font-weight:600; font-size:0.9rem; color:#0d1b2e; }
-    .pp-desc { font-size:0.78rem; color:rgba(13,27,46,0.45); }
-    .popup-cta { display:block; text-align:center; margin-bottom:12px; }
+    .pp-info { flex:1; min-width:0; display:flex; flex-direction:column; }
+    .pp-name { font-weight:600; font-size:0.9rem; color:#0d1b2e; overflow-wrap:break-word; }
+    .pp-desc { font-size:0.78rem; color:rgba(13,27,46,0.45); overflow-wrap:break-word; }
+    .popup-cta { display:block; width:100%; text-align:center; margin-bottom:12px; }
     .popup-expire { text-align:center; font-size:0.78rem; color:rgba(13,27,46,0.42); }
 
     /* FORM */
@@ -176,47 +183,6 @@
     .footer-socials a { color:rgba(255,255,255,0.3); text-decoration:none; font-size:0.8rem; transition:color 0.2s; }
     .footer-socials a:hover { color:white; }
 
-    /* ADMIN PANEL */
-    .admin-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.6); backdrop-filter:blur(8px); z-index:8000; align-items:center; justify-content:center; padding:20px; }
-    .admin-panel { background:white; border-radius:24px; width:100%; max-width:800px; max-height:90vh; overflow-y:auto; box-shadow:0 40px 100px rgba(13,27,46,0.3); }
-    .admin-header { display:flex; align-items:center; justify-content:space-between; padding:28px 36px; border-bottom:1px solid rgba(56,182,255,0.15); position:sticky; top:0; background:white; z-index:10; border-radius:24px 24px 0 0; }
-    .admin-header h2 { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:#0d1b2e; }
-    .admin-tabs { display:flex; gap:6px; padding:18px 36px 0; border-bottom:1px solid rgba(56,182,255,0.1); flex-wrap:wrap; }
-    .admin-tab { padding:10px 18px; border-radius:100px 100px 0 0; font-size:0.82rem; font-weight:600; border:none; background:transparent; color:rgba(13,27,46,0.4); cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; }
-    .admin-tab.active { color:var(--accent2); border-bottom-color:var(--accent2); background:rgba(56,182,255,0.05); }
-    .admin-body { padding:28px 36px 36px; }
-    .admin-section { display:none; }
-    .admin-section.active { display:block; }
-    .admin-field { margin-bottom:16px; }
-    .admin-field label { display:block; font-size:0.78rem; font-weight:700; color:rgba(13,27,46,0.5); letter-spacing:0; text-transform:uppercase; margin-bottom:6px; }
-    .admin-field input, .admin-field textarea { width:100%; border:1.5px solid rgba(56,182,255,0.2); border-radius:10px; padding:11px 14px; font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s; }
-    .admin-field input:focus, .admin-field textarea:focus { border-color:var(--accent); background:white; }
-    .admin-field textarea { min-height:70px; resize:vertical; }
-    .ag2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .admin-card { background:#f8fbff; border:1px solid rgba(56,182,255,0.15); border-radius:14px; padding:18px; margin-bottom:14px; }
-    .admin-card-title { font-family:var(--font-display); font-size:0.8rem; font-weight:700; color:#0d1b2e; margin-bottom:14px; letter-spacing:0; text-transform:uppercase; }
-    .admin-save { width:100%; background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; border:none; padding:14px; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:500; cursor:pointer; margin-top:6px; transition:transform 0.2s,box-shadow 0.2s; }
-    .admin-save:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(56,182,255,0.3); }
-    .admin-close { background:#f0f7ff; border:none; width:36px; height:36px; border-radius:50%; font-size:1rem; color:rgba(13,27,46,0.5); cursor:pointer; transition:background 0.2s; }
-    .admin-close:hover { background:var(--mid); }
-    .toast { position:fixed; bottom:80px; right:24px; background:#0d1b2e; color:white; padding:12px 22px; border-radius:100px; font-size:0.85rem; font-weight:500; z-index:9999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; }
-    .toast.show { opacity:1; transform:translateY(0); }
-
-    /* ADMIN PASSWORD MODAL */
-    .pwd-overlay { display:none; position:fixed; inset:0; background:rgba(13,27,46,0.65); backdrop-filter:blur(8px); z-index:9000; align-items:center; justify-content:center; }
-    .pwd-box { background:white; border-radius:20px; padding:40px 36px; max-width:380px; width:100%; box-shadow:0 40px 80px rgba(13,27,46,0.25); text-align:center; }
-    .pwd-box h3 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:#0d1b2e; margin-bottom:8px; }
-    .pwd-box p { font-size:0.85rem; color:rgba(13,27,46,0.45); margin-bottom:24px; }
-    .pwd-box input { width:100%; border:1.5px solid rgba(56,182,255,0.3); border-radius:10px; padding:12px 14px; font-family:'DM Sans',sans-serif; font-size:0.95rem; color:#0d1b2e; background:#f8fbff; outline:none; transition:border-color 0.2s; margin-bottom:12px; box-sizing:border-box; }
-    .pwd-box input:focus { border-color:var(--accent); background:white; }
-    .pwd-error { color:#e05555; font-size:0.82rem; margin-bottom:10px; min-height:18px; }
-    .pwd-actions { display:flex; gap:10px; margin-top:4px; }
-    .pwd-actions button { flex:1; padding:12px; border-radius:10px; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600; border:none; cursor:pointer; transition:all 0.2s; }
-    .pwd-confirm { background:linear-gradient(135deg,#38b6ff,#0077cc); color:white; }
-    .pwd-confirm:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(56,182,255,0.35); }
-    .pwd-cancel { background:#f0f7ff; color:rgba(13,27,46,0.6); }
-    .pwd-cancel:hover { background:#e2edf8; }
-
     @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
     .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s cubic-bezier(0.23,1,0.32,1),transform 0.8s cubic-bezier(0.23,1,0.32,1); }
     .reveal.visible { opacity:1; transform:translateY(0); }
@@ -235,11 +201,34 @@
       .cta-wrap h2{font-size:3.4rem;}
     }
     @media(max-width:640px){
-      .hero h1{font-size:3.1rem;}
+      nav{padding:16px 20px;}
+      .logo{font-size:1.1rem;}
+      .nav-cta{order:2;width:100%;padding:11px 18px;}
+      .nav-links{gap:12px;}
+      .nav-links a{font-size:0.7rem;}
+      .hero{padding-top:175px;width:100%;max-width:100%;}
+      .hero h1,.hero-sub,.hero-actions{width:100%;max-width:calc(100vw - 48px);}
+      .hero h1{font-size:2rem;}
+      .hero h1 .hl::after{bottom:4px;height:5px;}
+      .hero-actions{flex-direction:column;align-items:stretch;}
+      .hero-actions .btn-primary,.hero-actions .btn-ghost{width:100%;text-align:center;}
       .section-title{font-size:2.2rem;}
       .cta-wrap h2{font-size:2.7rem;}
       .stat-num{font-size:2.8rem;}
       .hero-sub{font-size:1rem;}
+      .popup-box{width:calc(100vw - 32px);max-width:calc(100vw - 32px);padding:34px 22px;}
+      .popup-box h3{font-size:1.35rem;}
+      .footer-cols{grid-template-columns:1fr;}
+    }
+    @media(max-width:380px){
+      .hero h1{font-size:1.86rem;}
+    }
+    @media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){
+      .cursor,.cursor-ring{display:none;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto;}
+      *,*::before,*::after{animation-duration:0.001ms!important;animation-iteration-count:1!important;transition-duration:0.001ms!important;}
     }
   </style>
 </head>
@@ -262,7 +251,7 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-tag">Studio Tech & Digital</div>
+  <div class="hero-tag">Startup</div>
   <h1>Nous créons<br/>des <em>apps</em> qui<br/><span class="hl">avancent</span> vite</h1>
   <p class="hero-sub">Media Vision conçoit des applications mobiles, des sites web et des solutions IA claires, rapides et prêtes à évoluer avec votre activité.</p>
   <div class="hero-actions">
@@ -308,7 +297,7 @@
 <!-- POPUP PROMO -->
 <div class="popup-overlay" id="popupOverlay">
   <div class="popup-box">
-    <button class="popup-close" id="popupClose">✕</button>
+    <button class="popup-close" id="popupClose" aria-label="Fermer la fenêtre de promotion">✕</button>
     <div class="popup-badge" id="popupBadge"></div>
     <h3 id="popupTitle"></h3>
     <p class="popup-sub" id="popupSub"></p>
@@ -326,7 +315,7 @@
     <div>
       <p class="form-intro">Expliquez-nous votre besoin. Nous revenons vers vous sous 24h avec une première orientation claire.</p>
       <div class="form-features">
-        <div class="form-feat">✅ Devis gratuit et sans engagement</div>
+        <div class="form-feat">✅ Premier échange sans engagement</div>
         <div class="form-feat">⚡ Réponse sous 24h garantie</div>
         <div class="form-feat">🔒 Vos données sont protégées (RGPD)</div>
         <div class="form-feat">🎯 Accompagnement personnalisé</div>
@@ -340,19 +329,19 @@
         <div class="form-group"><label>Nom *</label><input type="text" name="nom" placeholder="Dupont" required/></div>
       </div>
       <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="jean.dupont@email.com" required/></div>
-      <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+33 6 00 00 00 00"/></div>
+      <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+243 856 373 707"/></div>
       <div class="form-group"><label>Service souhaité *</label><select id="formServices" name="service" required></select></div>
       <div class="form-group">
         <label>Niveau de projet</label>
         <select name="project_level">
-          <option>Sélectionner...</option><option>Projet simple</option><option>Projet avancé</option>
+          <option value="" disabled selected>Sélectionner...</option><option>Projet simple</option><option>Projet avancé</option>
           <option>Projet complet</option><option>Accompagnement continu</option><option>À définir ensemble</option>
         </select>
       </div>
       <div class="form-group"><label>Décrivez votre projet *</label><textarea name="projet" placeholder="Vos objectifs, délais, détails..." required></textarea></div>
       <button class="submit-btn" type="submit" id="submitBtn">Envoyer ma demande →</button>
-      <div class="form-success" id="formSuccess">🎉 Merci ! Votre demande a bien été envoyée. Nous vous recontactons sous 24h.</div>
-      <div class="form-error" id="formError">Le formulaire n'a pas pu être envoyé. Réessayez ou contactez-nous par email.</div>
+      <div class="form-success" id="formSuccess" role="status" aria-live="polite">🎉 Merci ! Votre demande a bien été envoyée. Nous vous recontactons sous 24h.</div>
+      <div class="form-error" id="formError" role="alert">Le formulaire n'a pas pu être envoyé. Réessayez ou contactez-nous par email.</div>
     </form>
   </div>
 </section>
@@ -367,120 +356,45 @@
   <div class="footer-top">
     <div>
       <div class="f-logo">M<span class="dot">·</span>V<span class="vsuffix">ision</span></div>
-      <p class="f-tagline">Votre partenaire tech & digital</p>
+      <p class="f-tagline">Startup tech & digitale</p>
       <div class="f-contact">
         <div class="fci">📍 <span id="fAddress"></span></div>
-        <div class="fci">✉️ <a id="fEmail" href="mailto:hello@mediavision.tech"></a></div>
+        <div class="fci">✉️ <a id="fEmail" href="mailto:hello.mediavision.tech@gmail.com"></a></div>
         <div class="fci">📞 <span id="fPhone"></span></div>
       </div>
     </div>
     <div class="footer-cols">
       <div class="footer-col"><span class="footer-col-title">Services</span><div id="fServices"></div></div>
       <div class="footer-col"><span class="footer-col-title">Entreprise</span><a href="#services">À propos</a><a href="applications.html">Applications</a><a href="#inscription">Projet</a><a href="#contact">Contact</a></div>
-      <div class="footer-col"><span class="footer-col-title">Légal</span><a href="mailto:hello@mediavision.tech?subject=Mentions%20legales">Mentions légales</a><a href="mailto:hello@mediavision.tech?subject=Conditions%20generales">CGV</a><a href="mailto:hello@mediavision.tech?subject=Confidentialite">Confidentialité</a></div>
+      <div class="footer-col"><span class="footer-col-title">Légal</span><a href="mailto:hello.mediavision.tech@gmail.com?subject=Mentions%20legales">Mentions légales</a><a href="mailto:hello.mediavision.tech@gmail.com?subject=Conditions%20generales">CGV</a><a href="mailto:hello.mediavision.tech@gmail.com?subject=Confidentialite">Confidentialité</a></div>
     </div>
   </div>
   <div class="footer-bottom">
     <p id="fCopy"></p>
-    <div class="footer-socials"><a href="https://github.com/davekbg08-cloud/desktop-tutorial" target="_blank" rel="noopener noreferrer">GitHub</a><a href="applications.html">Applications</a><a href="mailto:hello@mediavision.tech">Email</a></div>
+    <div class="footer-socials"><a href="https://github.com/davekbg08-cloud/desktop-tutorial" target="_blank" rel="noopener noreferrer">GitHub</a><a href="applications.html">Applications</a><a href="mailto:hello.mediavision.tech@gmail.com">Email</a></div>
   </div>
 </footer>
 
-<!-- MOT DE PASSE ADMIN -->
-<div class="pwd-overlay" id="pwdOverlay">
-  <div class="pwd-box">
-    <h3>🔐 Accès Administration</h3>
-    <p>Entrez le mot de passe administrateur pour continuer.</p>
-    <input type="password" id="pwdInput" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPwd()"/>
-    <div class="pwd-error" id="pwdError"></div>
-    <div class="pwd-actions">
-      <button class="pwd-cancel" onclick="closePwd()">Annuler</button>
-      <button class="pwd-confirm" onclick="checkPwd()">Confirmer</button>
-    </div>
-  </div>
-</div>
-
-<!-- PANNEAU ADMIN -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <h2>⚙️ Panneau d'administration</h2>
-      <button class="admin-close" onclick="closeAdmin()">✕</button>
-    </div>
-    <div class="admin-tabs" id="adminTabs">
-      <button class="admin-tab active" data-tab="contact">📍 Contact</button>
-      <button class="admin-tab" data-tab="promo">🎉 Popup promo</button>
-      <button class="admin-tab" data-tab="produits">📦 Solutions</button>
-      <button class="admin-tab" data-tab="services">🛠 Services</button>
-      <button class="admin-tab" data-tab="projets">💼 Projets</button>
-    </div>
-    <div class="admin-body">
-
-      <div class="admin-section active" id="tab-contact">
-        <div class="admin-field"><label>Adresse physique</label><input id="a-addr"/></div>
-        <div class="ag2">
-          <div class="admin-field"><label>Email</label><input id="a-email" type="email"/></div>
-          <div class="admin-field"><label>Téléphone</label><input id="a-phone"/></div>
-        </div>
-        <div class="admin-field"><label>Texte copyright</label><input id="a-copy"/></div>
-        <button class="admin-save" onclick="saveContact()">💾 Sauvegarder les coordonnées</button>
-      </div>
-
-      <div class="admin-section" id="tab-promo">
-        <div class="ag2">
-          <div class="admin-field"><label>Badge</label><input id="p-badge"/></div>
-          <div class="admin-field"><label>Mention complémentaire</label><input id="p-expire"/></div>
-        </div>
-        <div class="admin-field"><label>Titre de la popup</label><input id="p-title"/></div>
-        <div class="admin-field"><label>Sous-titre</label><input id="p-sub"/></div>
-        <div class="admin-field"><label>Texte du bouton</label><input id="p-cta"/></div>
-        <button class="admin-save" onclick="savePopup()">💾 Sauvegarder la popup</button>
-      </div>
-
-      <div class="admin-section" id="tab-produits">
-        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Solutions affichées dans la fenêtre de présentation.</p>
-        <div id="adminProduits"></div>
-        <button class="admin-save" onclick="saveProducts()">💾 Sauvegarder les produits</button>
-      </div>
-
-      <div class="admin-section" id="tab-services">
-        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Services affichés sur le site et dans le formulaire de projet.</p>
-        <div id="adminServices"></div>
-        <button class="admin-save" onclick="saveServices()">💾 Sauvegarder les services</button>
-      </div>
-
-      <div class="admin-section" id="tab-projets">
-        <p style="font-size:0.82rem;color:rgba(13,27,46,0.4);margin-bottom:18px;">Les 3 projets affichés dans la section portfolio.</p>
-        <div id="adminProjets"></div>
-        <button class="admin-save" onclick="saveProjects()">💾 Sauvegarder les projets</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast">✅ Modifications sauvegardées !</div>
-
 <script>
 // ======================================================
-//  CONFIG CENTRALE — modifiable via le panneau admin
+//  CONFIG CENTRALE DU SITE
 // ======================================================
 const DEFAULT_CONFIG = {
   contact: {
-    address: "12 Rue de l'Innovation, 75008 Paris, France",
-    email: "hello@mediavision.tech",
-    phone: "243856373707",
+    address: "RDC, Haut-Katanga, N° 1030, Av. Tshangalele, commune de Likasi - N° impôt A2533328E",
+    email: "hello.mediavision.tech@gmail.com",
+    phone: "+243 856 373 707",
     copy: "© 2026 MediaVision. Tous droits réservés."
   },
   popup: {
     badge: "✨ Solutions Media Vision",
     title: "Solutions prêtes à lancer",
-    sub: "Des offres claires pour démarrer rapidement votre projet digital.",
+    sub: "Des solutions claires pour démarrer rapidement votre projet digital.",
     cta: "Demander un échange →",
-    expire: "Conseil et devis personnalisés sur demande."
+    expire: "Conseil personnalisé sur demande."
   },
   products: [
-    { icon:"📱", name:"App Mobile Starter", desc:"Application iOS et Android sur mesure" },
+    { icon:"📱", name:"App mobile sur mesure", desc:"Application iOS et Android sur mesure" },
     { icon:"🌐", name:"Site Web Pro", desc:"Site vitrine ou e-commerce complet" },
     { icon:"🤖", name:"Intégration IA", desc:"Chatbot, automatisation et assistant intelligent" }
   ],
@@ -499,7 +413,13 @@ const DEFAULT_CONFIG = {
   ]
 };
 
-let C = JSON.parse(localStorage.getItem('mv-config') || JSON.stringify(DEFAULT_CONFIG));
+const C = DEFAULT_CONFIG;
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[ch]));
+}
 
 // ========== RENDER ==========
 
@@ -511,16 +431,16 @@ function renderAll() {
 function renderMarquee() {
   const items = C.services.map(s=>s.title);
   const doubled = [...items,...items,...items,...items];
-  document.getElementById('marqueeTrack').innerHTML = doubled.map(t=>`<div class="marquee-item">${t}</div>`).join('');
+  document.getElementById('marqueeTrack').innerHTML = doubled.map(t=>`<div class="marquee-item">${escapeHtml(t)}</div>`).join('');
 }
 
 function renderServices() {
   document.getElementById('servicesGrid').innerHTML = C.services.map((s,i)=>`
     <div class="service-card">
-      <div class="service-icon">${s.icon}</div>
+      <div class="service-icon">${escapeHtml(s.icon)}</div>
       <div class="service-num">0${i+1}</div>
-      <h3>${s.title}</h3>
-      <p>${s.desc}</p>
+      <h3>${escapeHtml(s.title)}</h3>
+      <p>${escapeHtml(s.desc)}</p>
       <div class="service-arrow">→</div>
     </div>`).join('');
 }
@@ -530,10 +450,10 @@ function renderProjects() {
   const cards = C.projects.map((p,i)=>`
     <div class="project-card ${cls[i]||'pc1'}">
       <div class="pcbg"></div>
-      <a class="project-link" href="#inscription" aria-label="Parler du projet ${p.title}">↗</a>
-      <div class="project-tag">${p.tag}</div>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
+      <a class="project-link" href="#inscription" aria-label="Parler du projet ${escapeHtml(p.title)}">↗</a>
+      <div class="project-tag">${escapeHtml(p.tag)}</div>
+      <h3>${escapeHtml(p.title)}</h3>
+      <p>${escapeHtml(p.desc)}</p>
     </div>`);
   document.getElementById('projectsGrid').innerHTML = `
     ${cards[0]}
@@ -549,8 +469,8 @@ function renderPopupContent() {
   document.getElementById('popupExpire').textContent = p.expire;
   document.getElementById('popupProducts').innerHTML = C.products.map(pr=>`
     <div class="popup-product">
-      <div class="pp-icon">${pr.icon}</div>
-      <div class="pp-info"><span class="pp-name">${pr.name}</span><span class="pp-desc">${pr.desc}</span></div>
+      <div class="pp-icon">${escapeHtml(pr.icon)}</div>
+      <div class="pp-info"><span class="pp-name">${escapeHtml(pr.name)}</span><span class="pp-desc">${escapeHtml(pr.desc)}</span></div>
     </div>`).join('');
 }
 
@@ -565,146 +485,32 @@ function renderContact() {
 
 function renderFormServices() {
   document.getElementById('formServices').innerHTML =
-    `<option>Choisir un service...</option>` +
-    C.services.map(s=>`<option>${s.title}</option>`).join('');
+    `<option value="" disabled selected>Choisir un service...</option>` +
+    C.services.map(s=>`<option>${escapeHtml(s.title)}</option>`).join('');
 }
 
 function renderFooterServices() {
   document.getElementById('fServices').innerHTML =
-    C.services.map(s=>`<a href="#services">${s.title}</a>`).join('');
+    C.services.map(s=>`<a href="#services">${escapeHtml(s.title)}</a>`).join('');
 }
 
-// ========== ADMIN PANEL ==========
-
-const ADMIN_PWD = 'Admin2026!';
-let adminUnlocked = false;
-
-function openAdmin() {
-  if (adminUnlocked) {
-    fillForms();
-    document.getElementById('adminOverlay').style.display='flex';
-  } else {
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdError').textContent = '';
-    document.getElementById('pwdOverlay').style.display='flex';
-    setTimeout(()=>document.getElementById('pwdInput').focus(),100);
-  }
-}
-function checkPwd() {
-  const val = document.getElementById('pwdInput').value;
-  if (val === ADMIN_PWD) {
-    adminUnlocked = true;
-    closePwd();
-    fillForms();
-    document.getElementById('adminOverlay').style.display='flex';
-  } else {
-    document.getElementById('pwdError').textContent = '❌ Mot de passe incorrect.';
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
-  }
-}
-function closePwd() { document.getElementById('pwdOverlay').style.display='none'; }
-function closeAdmin() { document.getElementById('adminOverlay').style.display='none'; }
-function closePopup()  { document.getElementById('popupOverlay').style.display='none'; }
-
-document.getElementById('adminOverlay').addEventListener('click', e=>{
-  if(e.target===document.getElementById('adminOverlay')) closeAdmin();
-});
-document.getElementById('pwdOverlay').addEventListener('click', e=>{
-  if(e.target===document.getElementById('pwdOverlay')) closePwd();
-});
-
-// Tabs
-document.getElementById('adminTabs').addEventListener('click', e=>{
-  const btn = e.target.closest('.admin-tab');
-  if(!btn) return;
-  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-});
-
-function fillForms() {
-  // Contact
-  document.getElementById('a-addr').value  = C.contact.address;
-  document.getElementById('a-email').value = C.contact.email;
-  document.getElementById('a-phone').value = C.contact.phone;
-  document.getElementById('a-copy').value  = C.contact.copy;
-  // Popup
-  document.getElementById('p-badge').value  = C.popup.badge;
-  document.getElementById('p-title').value  = C.popup.title;
-  document.getElementById('p-sub').value    = C.popup.sub;
-  document.getElementById('p-cta').value    = C.popup.cta;
-  document.getElementById('p-expire').value = C.popup.expire;
-  // Products
-  document.getElementById('adminProduits').innerHTML = C.products.map((p,i)=>`
-    <div class="admin-card">
-      <div class="admin-card-title">Produit ${i+1}</div>
-      <div class="ag2">
-        <div class="admin-field"><label>Icône</label><input data-p="${i}" data-k="icon" value="${p.icon}"/></div>
-        <div class="admin-field"><label>Nom</label><input data-p="${i}" data-k="name" value="${p.name}"/></div>
-      </div>
-      <div class="admin-field"><label>Description</label><input data-p="${i}" data-k="desc" value="${p.desc}"/></div>
-    </div>`).join('');
-  // Services
-  document.getElementById('adminServices').innerHTML = C.services.map((s,i)=>`
-    <div class="admin-card">
-      <div class="admin-card-title">Service ${i+1}</div>
-      <div class="ag2">
-        <div class="admin-field"><label>Icône</label><input data-s="${i}" data-k="icon" value="${s.icon}"/></div>
-        <div class="admin-field"><label>Titre</label><input data-s="${i}" data-k="title" value="${s.title}"/></div>
-      </div>
-      <div class="admin-field"><label>Description</label><textarea data-s="${i}" data-k="desc">${s.desc}</textarea></div>
-    </div>`).join('');
-  // Projets
-  document.getElementById('adminProjets').innerHTML = C.projects.map((p,i)=>`
-    <div class="admin-card">
-      <div class="admin-card-title">Projet ${i+1}</div>
-      <div class="ag2">
-        <div class="admin-field"><label>Catégorie / Tag</label><input data-pr="${i}" data-k="tag" value="${p.tag}"/></div>
-        <div class="admin-field"><label>Titre</label><input data-pr="${i}" data-k="title" value="${p.title}"/></div>
-      </div>
-      <div class="admin-field"><label>Description</label><textarea data-pr="${i}" data-k="desc">${p.desc}</textarea></div>
-    </div>`).join('');
-}
-
-function saveContact() {
-  C.contact = { address:document.getElementById('a-addr').value, email:document.getElementById('a-email').value, phone:document.getElementById('a-phone').value, copy:document.getElementById('a-copy').value };
-  persist(); renderContact(); showToast();
-}
-function savePopup() {
-  C.popup = { badge:document.getElementById('p-badge').value, title:document.getElementById('p-title').value, sub:document.getElementById('p-sub').value, cta:document.getElementById('p-cta').value, expire:document.getElementById('p-expire').value };
-  persist(); renderPopupContent(); showToast();
-}
-function saveProducts() {
-  document.querySelectorAll('[data-p]').forEach(el=>{ C.products[el.dataset.p][el.dataset.k]=el.value; });
-  persist(); renderPopupContent(); showToast();
-}
-function saveServices() {
-  document.querySelectorAll('[data-s]').forEach(el=>{ C.services[el.dataset.s][el.dataset.k]=el.value; });
-  persist(); renderServices(); renderFormServices(); renderFooterServices(); renderMarquee(); showToast();
-}
-function saveProjects() {
-  document.querySelectorAll('[data-pr]').forEach(el=>{ C.projects[el.dataset.pr][el.dataset.k]=el.value; });
-  persist(); renderProjects(); showToast();
-}
-
-function persist()   { localStorage.setItem('mv-config', JSON.stringify(C)); }
-function showToast() {
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2500);
+function closePopup()  {
+  document.getElementById('popupOverlay').style.display='none';
+  try { sessionStorage.setItem('mv-popup-seen', '1'); } catch (_) {}
 }
 
 // ========== CURSOR ==========
 const cursor=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px'; });
-(function loop(){ rx+=(mx-rx-20)*0.12; ry+=(my-ry-20)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.5)'; });
-  el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; });
-});
+const enableCursor = window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (enableCursor && cursor && ring) {
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px'; });
+  (function loop(){ rx+=(mx-rx-20)*0.12; ry+=(my-ry-20)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2.5)'; ring.style.transform='scale(1.5)'; });
+    el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; });
+  });
+}
 
 // ========== SCROLL & REVEAL ==========
 window.addEventListener('scroll',()=>{
@@ -716,7 +522,19 @@ const revObs = new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 
 // ========== POPUP ==========
-setTimeout(()=>{ document.getElementById('popupOverlay').style.display='flex'; },2500);
+function schedulePopup() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const alreadySeen = (() => {
+    try { return sessionStorage.getItem('mv-popup-seen') === '1'; } catch (_) { return false; }
+  })();
+  if (reduceMotion || alreadySeen) return;
+  setTimeout(()=>{
+    document.getElementById('popupOverlay').style.display='flex';
+    try { sessionStorage.setItem('mv-popup-seen', '1'); } catch (_) {}
+  }, 4000);
+}
+
+schedulePopup();
 document.getElementById('popupClose').addEventListener('click', closePopup);
 document.getElementById('popupOverlay').addEventListener('click',e=>{ if(e.target===document.getElementById('popupOverlay')) closePopup(); });
 
