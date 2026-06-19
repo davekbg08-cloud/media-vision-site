@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Catalogue des applications Media Vision, avec accès Play Store ou APK direct dès disponibilité officielle."/>
+<meta name="description" content="Catalogue des applications Media Vision, avec MedConnect et les accès Play Store ou APK direct dès disponibilité officielle."/>
 <meta name="theme-color" content="#050914"/>
 <meta property="og:title" content="Media Vision — Nos Applications"/>
 <meta property="og:description" content="Retrouvez les applications Media Vision et leurs liens de téléchargement lorsqu'elles sont disponibles."/>
@@ -234,6 +234,7 @@
   .star.on { color: #FFD700; }
   .star.off { color: #2d3748; }
   .rating-val { color: #64748b; font-size: 11px; margin-left: 5px; }
+  .rating-new { margin-left: 0; color: #00C6FF; font-weight: 700; }
 
   .meta-right {
     display: flex;
@@ -359,7 +360,7 @@
       <div class="divider-line"></div>
     </div>
     <h1>Nos Applications<br><span>Phares</span></h1>
-    <p class="subtitle">Téléchargez les applications Media Vision depuis le Play Store ou en fichier APK pour une installation manuelle.</p>
+    <p class="subtitle">Téléchargez les applications Media Vision depuis le Play Store ou en fichier APK dès leur disponibilité officielle.</p>
   </div>
 
   <!-- Grille -->
@@ -368,13 +369,28 @@
   <!-- Note APK -->
   <div class="apk-note">
     <span style="font-size:22px">⚠️</span>
-    <p>Pour installer un APK, activez l'option <strong>"Sources inconnues"</strong> dans les paramètres de sécurité de votre appareil Android.</p>
+    <p>Les liens APK directs apparaissent uniquement lorsque les fichiers officiels sont ajoutés. Pour installer un APK, activez l'option <strong>"Sources inconnues"</strong> dans les paramètres de sécurité de votre appareil Android.</p>
   </div>
 
 </section>
 
 <script>
 const apps = [
+  {
+    name: "MedConnect",
+    category: "Santé numérique",
+    desc: "Plateforme pilote de coordination des soins pour organiser les informations entre patients, professionnels de santé, pharmacies et établissements.",
+    version: "v2.0.0",
+    size: "PWA / Android",
+    icon: "🏥",
+    color: "#0EA5E9",
+    playUrl: "https://play.google.com/store/apps/details?id=com.medconnect.app",
+    playAvailable: false,
+    apkUrl: "/downloads/medconnect.apk",
+    apkAvailable: false,
+    downloads: "Pilote",
+    rating: null,
+  },
   {
     name: "Media Vision News",
     category: "Actualités",
@@ -445,6 +461,9 @@ function hexToRgba(hex, a) {
 }
 
 function stars(rating) {
+  if (rating === null || rating === undefined) {
+    return `<div class="stars"><span class="rating-val rating-new">Nouveau</span></div>`;
+  }
   let s = '';
   for(let i=1;i<=5;i++) {
     s += `<span class="star ${i<=Math.round(rating)?'on':'off'}">${i<=Math.round(rating)?'★':'★'}</span>`;
