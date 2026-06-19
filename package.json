@@ -4,6 +4,7 @@
   "private": true,
   "description": "Site statique Media Vision",
   "scripts": {
+    "build": "echo Static site - no build needed",
     "dev": "python -m http.server 8080"
   }
 }
