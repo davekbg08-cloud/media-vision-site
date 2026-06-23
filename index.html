@@ -535,7 +535,8 @@ function schedulePopup() {
   }, 4000);
 }
 
-schedulePopup();
+// Popup désactivé : ne plus ouvrir la fenêtre automatiquement.
+// schedulePopup();
 document.getElementById('popupClose').addEventListener('click', closePopup);
 document.getElementById('popupOverlay').addEventListener('click',e=>{ if(e.target===document.getElementById('popupOverlay')) closePopup(); });
 
