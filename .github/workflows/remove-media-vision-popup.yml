@@ -1,0 +1,48 @@
+name: Remove Media Vision popup
+
+on:
+  push:
+    paths:
+      - ".github/workflows/remove-media-vision-popup.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  remove-popup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Disable homepage popup
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+          original = html
+
+          html = html.replace(
+              "schedulePopup();",
+              "// Popup désactivé : ne plus ouvrir la fenêtre automatiquement.\n// schedulePopup();"
+          )
+
+          if html == original:
+              raise SystemExit("Aucune modification appliquée : appel schedulePopup() introuvable.")
+
+          path.write_text(html, encoding="utf-8")
+          PY
+
+      - name: Remove one-time workflow
+        run: rm -f .github/workflows/remove-media-vision-popup.yml
+
+      - name: Commit popup removal
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/remove-media-vision-popup.yml
+          git commit -m "Remove automatic homepage popup"
+          git push
