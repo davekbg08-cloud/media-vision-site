@@ -4,6 +4,7 @@ Place les fichiers APK de Media Vision dans ce dossier.
 
 Les liens actuels dans `applications.html` attendent ces fichiers :
 
+- `occasion.apk`
 - `mediavision-news.apk`
 - `vision-radio.apk`
 - `vision-tv.apk`
