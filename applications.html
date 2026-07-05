@@ -401,6 +401,7 @@ const apps = [
     version: "v1.0.0",
     size: "96 Mo",
     icon: "O",
+    iconImg: "assets/logos/occasion-logo.jpg",
     color: "#F59E0B",
     playUrl: "https://play.google.com/store/apps/details?id=com.occasion.app",
     playAvailable: true,
@@ -538,7 +539,7 @@ apps.forEach(app => {
 
   card.innerHTML = `
     <div class="card-top">
-      <div class="app-icon">${escapeHtml(app.icon)}</div>
+      <div class="app-icon">${app.iconImg ? `<img src="${escapeHtml(app.iconImg)}" alt="${escapeHtml(app.name)} logo" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">` : escapeHtml(app.icon)}</div>
       <div>
         <div class="app-name">${escapeHtml(app.name)}</div>
         <span class="app-cat">${escapeHtml(app.category)}</span>
