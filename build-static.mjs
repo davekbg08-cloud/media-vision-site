@@ -6,7 +6,11 @@ const files = [
   'about.html',
   'privacy-policy.html',
   'terms.html',
+  'realisations.html',
+  'carrieres.html',
+  'merci.html',
   'downloads',
+  'assets',
   'README.md',
   'netlify.toml',
 ];
