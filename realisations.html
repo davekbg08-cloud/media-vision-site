@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Découvrez les réalisations Media Vision : MedConnect, Occasion et Ma Gestion, avec leurs captures et présentations."/>
+  <meta name="theme-color" content="#f4f9ff"/>
+  <title>Réalisations — Media Vision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/site-v2.css"/>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Navigation principale">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Media<span>Vision</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a class="active" href="realisations.html">Réalisations</a></li>
+        <li><a href="carrieres.html">Carrières</a></li>
+        <li><a href="about.html">À propos</a></li>
+      </ul>
+      <a class="nav-cta" href="index.html#contact">Démarrer un projet</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Portfolio Media Vision</span>
+      <h1>Trois projets réels,<br/><span style="color:var(--primary)">présentés clairement.</span></h1>
+      <p>Cette page rassemble uniquement les projets appartenant à Media Vision : MedConnect, Occasion et Ma Gestion. Les espaces photos pourront recevoir progressivement les vraies captures de chaque réalisation.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section-soft">
+      <div class="container">
+        <div class="project-grid">
+          <article class="project-card" id="medconnect">
+            <div class="project-top"><img class="project-logo" src="assets/logos/medconnect.svg" alt="Icône MedConnect"/><span class="project-status">Projet pilote</span></div>
+            <div class="project-body"><div class="project-type">Santé numérique</div><h3>MedConnect</h3><p>Dossiers médicaux, coordination des professionnels, pharmacies, établissements, notifications et rôles sécurisés.</p><div class="project-actions"><a class="btn btn-primary" href="https://davekbg08-cloud.github.io/media-vision-medconnect/" target="_blank" rel="noopener noreferrer">Voir la version publique</a></div></div>
+          </article>
+          <article class="project-card" id="occasion">
+            <div class="project-top"><img class="project-logo" src="assets/logos/occasion-logo.jpg" alt="Icône Occasion"/><span class="project-status">Publication en cours</span></div>
+            <div class="project-body"><div class="project-type">Marketplace</div><h3>Occasion</h3><p>Petites annonces, profils acheteurs et vendeurs, publication de produits, médias et messagerie privée.</p><div class="project-actions"><a class="btn btn-primary" href="https://davekbg08-cloud.github.io/occasion/" target="_blank" rel="noopener noreferrer">Ouvrir l'application</a></div></div>
+          </article>
+          <article class="project-card" id="ma-gestion">
+            <div class="project-top"><img class="project-logo" src="assets/logos/ma-gestion.svg" alt="Icône Ma Gestion"/><span class="project-status">En développement</span></div>
+            <div class="project-body"><div class="project-type">Gestion d'activité</div><h3>Ma Gestion</h3><p>Suivi Mobile Money, calcul de commissions, rapports journaliers, fonctionnement local et synchronisation cloud.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galerie">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">Galerie filtrable</div><h2 class="section-title">Photos, captures<br/>et présentations.</h2></div>
+          <p class="section-copy">Clique sur une image pour l'agrandir. Les emplacements servent de base et pourront recevoir les vraies captures sans modifier la structure de la page.</p>
+        </div>
+        <div class="filter-bar" role="group" aria-label="Filtrer la galerie">
+          <button class="filter-btn active" data-filter="all">Tout</button>
+          <button class="filter-btn" data-filter="medconnect">MedConnect</button>
+          <button class="filter-btn" data-filter="occasion">Occasion</button>
+          <button class="filter-btn" data-filter="gestion">Ma Gestion</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+          <figure class="photo-card gallery-item" data-category="medconnect" data-full="assets/logos/medconnect.svg" data-title="MedConnect — présentation principale"><img src="assets/logos/medconnect.svg" alt="Présentation MedConnect"/><figcaption class="photo-caption"><strong>MedConnect</strong><small>Ajouter ici une grande capture de l'application</small></figcaption></figure>
+          <figure class="photo-card gallery-item" data-category="occasion" data-full="assets/logos/occasion-logo.jpg" data-title="Occasion — application mobile"><img src="assets/logos/occasion-logo.jpg" alt="Présentation Occasion"/><figcaption class="photo-caption"><strong>Occasion</strong><small>Ajouter ici une capture mobile réelle</small></figcaption></figure>
+          <figure class="photo-card gallery-item" data-category="gestion" data-full="assets/logos/ma-gestion.svg" data-title="Ma Gestion — application de gestion"><img src="assets/logos/ma-gestion.svg" alt="Présentation Ma Gestion"/><figcaption class="photo-caption"><strong>Ma Gestion</strong><small>Ajouter ici une capture du tableau de bord</small></figcaption></figure>
+          <figure class="photo-card gallery-item" data-category="medconnect" data-title="Capture MedConnect"><div class="photo-placeholder"><div><span>🏥</span>Écran MedConnect<br/><small>Dossier, ordonnance ou établissement</small></div></div><figcaption class="photo-caption"><strong>MedConnect</strong><small>Capture supplémentaire</small></figcaption></figure>
+          <figure class="photo-card gallery-item" data-category="occasion" data-title="Capture Occasion"><div class="photo-placeholder"><div><span>🛍️</span>Écran Occasion<br/><small>Annonce, profil ou messagerie</small></div></div><figcaption class="photo-caption"><strong>Occasion</strong><small>Capture supplémentaire</small></figcaption></figure>
+          <figure class="photo-card gallery-item" data-category="gestion" data-title="Capture Ma Gestion"><div class="photo-placeholder"><div><span>📊</span>Écran Ma Gestion<br/><small>Rapport, transaction ou synchronisation</small></div></div><figcaption class="photo-caption"><strong>Ma Gestion</strong><small>Capture supplémentaire</small></figcaption></figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu de la réalisation"><div class="lightbox-content"><button class="lightbox-close" id="lightboxClose" aria-label="Fermer">×</button><img id="lightboxImage" alt="Aperçu agrandi"/><div class="lightbox-caption"><strong id="lightboxTitle"></strong><p style="color:var(--muted);margin-top:5px">Cette image peut être remplacée par une capture réelle du projet.</p></div></div></div>
+
+  <footer><div class="container"><div class="footer-grid"><div><a class="brand" href="index.html">Media<span>Vision</span></a><p style="margin-top:14px">Applications, sites web et solutions numériques conçus depuis la RDC.</p></div><div><div class="footer-title">Découvrir</div><a href="applications.html">Applications</a><a href="realisations.html">Réalisations</a><a href="carrieres.html">Carrières</a></div><div><div class="footer-title">Informations</div><a href="about.html">À propos</a><a href="privacy-policy.html">Confidentialité</a><a href="terms.html">Conditions</a></div></div><div class="footer-bottom"><span>© 2026 Media Vision.</span><span>Likasi · Haut-Katanga · RDC</span></div></div></footer>
+
+  <script>
+    const buttons=document.querySelectorAll('.filter-btn');
+    const items=document.querySelectorAll('.gallery-item');
+    buttons.forEach(button=>button.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));button.classList.add('active');const filter=button.dataset.filter;items.forEach(item=>{item.style.display=filter==='all'||item.dataset.category===filter?'block':'none'})}));
+    const lightbox=document.getElementById('lightbox');const lightboxImage=document.getElementById('lightboxImage');const lightboxTitle=document.getElementById('lightboxTitle');
+    items.forEach(item=>item.addEventListener('click',()=>{const source=item.dataset.full||item.querySelector('img')?.src;if(!source)return;lightboxImage.src=source;lightboxTitle.textContent=item.dataset.title||'Réalisation Media Vision';lightbox.classList.add('open');document.body.style.overflow='hidden'}));
+    function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow=''}
+    document.getElementById('lightboxClose').addEventListener('click',closeLightbox);lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeLightbox()});
+  </script>
+</body>
+</html>
