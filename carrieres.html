@@ -30,7 +30,7 @@
     <div class="container">
       <span class="eyebrow">Rejoindre Media Vision</span>
       <h1>Apprendre, contribuer<br/><span style="color:var(--primary)">et construire des solutions utiles.</span></h1>
-      <p>Cette nouvelle page permet de recevoir des candidatures pour des stages, collaborations, missions ponctuelles ou contributions aux projets Media Vision.</p>
+      <p>Cette page permet de recevoir des candidatures pour des stages, collaborations, missions ponctuelles ou contributions aux projets Media Vision.</p>
       <div class="hero-actions"><a class="btn btn-primary" href="#opportunites">Voir les profils recherchés</a><a class="btn btn-secondary" href="#candidature">Candidature spontanée</a></div>
     </div>
   </header>
@@ -62,10 +62,11 @@
     <section class="section section-soft" id="candidature">
       <div class="container form-grid">
         <div><div class="section-kicker">Candidature</div><h2 class="section-title">Présente ton profil<br/>et ce que tu sais faire.</h2><p class="section-copy">Indique le domaine qui t'intéresse, ton niveau actuel et un lien vers un portfolio ou GitHub lorsque c'est possible.</p><div class="notice" style="margin-top:22px">Une candidature envoyée ne garantit pas une offre ou une mission. Elle permet à Media Vision de reprendre contact lorsqu'une opportunité adaptée apparaît.</div></div>
-        <form class="form-box" name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+        <form class="form-box" name="career-application" method="POST" action="/merci.html" data-netlify="true" netlify netlify-honeypot="bot-field" enctype="multipart/form-data">
           <input type="hidden" name="form-name" value="career-application"/>
+          <input type="hidden" name="subject" value="Nouvelle candidature Media Vision"/>
           <p hidden><label>Ne pas remplir : <input name="bot-field"/></label></p>
-          <div class="field-row"><div class="field"><label for="prenom">Prénom *</label><input id="prenom" name="prenom" required/></div><div class="field"><label for="nom">Nom *</label><input id="nom" name="nom" required/></div></div>
+          <div class="field-row"><div class="field"><label for="prenom">Prénom *</label><input id="prenom" name="prenom" type="text" required/></div><div class="field"><label for="nom">Nom *</label><input id="nom" name="nom" type="text" required/></div></div>
           <div class="field-row"><div class="field"><label for="email">Email *</label><input id="email" type="email" name="email" required/></div><div class="field"><label for="telephone">Téléphone</label><input id="telephone" type="tel" name="telephone" placeholder="+243 ..."/></div></div>
           <div class="field"><label for="domaine">Domaine souhaité *</label><select id="domaine" name="domaine" required><option value="">Choisir...</option><option>Flutter / mobile</option><option>Développement web</option><option>UI/UX et graphisme</option><option>Communication / contenus</option><option>Partenariats / commercial</option><option>Autre collaboration</option></select></div>
           <div class="field"><label for="niveau">Niveau actuel</label><select id="niveau" name="niveau"><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option><option>Étudiant / en formation</option></select></div>
