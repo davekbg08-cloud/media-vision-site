@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Carrières Media Vision : stages, collaborations et candidatures pour participer à des projets mobiles, web, design et numériques en RDC."/>
+  <meta name="theme-color" content="#f4f9ff"/>
+  <title>Carrières — Media Vision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/site-v2.css"/>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Navigation principale">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Media<span>Vision</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a class="active" href="carrieres.html">Carrières</a></li>
+        <li><a href="about.html">À propos</a></li>
+      </ul>
+      <a class="nav-cta" href="#candidature">Postuler</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Rejoindre Media Vision</span>
+      <h1>Apprendre, contribuer<br/><span style="color:var(--primary)">et construire des solutions utiles.</span></h1>
+      <p>Media Vision peut recevoir des candidatures pour des stages, collaborations, missions ponctuelles ou contributions à ses projets. Cette page ne promet pas un recrutement immédiat : elle permet de constituer un réseau de talents.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#opportunites">Voir les profils recherchés</a><a class="btn btn-secondary" href="#candidature">Candidature spontanée</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section section-soft" id="opportunites">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">Opportunités</div><h2 class="section-title">Des profils capables<br/>de progresser avec les projets.</h2></div>
+          <p class="section-copy">Les besoins évoluent selon les applications en cours. Les candidatures peuvent être conservées pour une future collaboration lorsque le profil correspond à un besoin réel.</p>
+        </div>
+        <div class="career-grid">
+          <article class="career-card"><div class="feature-icon">📱</div><div class="project-type">Développement</div><h3>Flutter & applications mobiles</h3><p>Participation aux interfaces, correction de bugs, tests, Firebase et préparation des versions Android ou PWA.</p><div class="career-meta"><span class="pill">Stage possible</span><span class="pill">Flutter</span><span class="pill">Firebase</span></div></article>
+          <article class="career-card"><div class="feature-icon">🌐</div><div class="project-type">Web</div><h3>Développement web & déploiement</h3><p>Création de pages, amélioration responsive, formulaires, GitHub Pages, Netlify et intégrations simples.</p><div class="career-meta"><span class="pill">HTML / CSS / JS</span><span class="pill">GitHub</span><span class="pill">Netlify</span></div></article>
+          <article class="career-card"><div class="feature-icon">🎨</div><div class="project-type">Création</div><h3>UI/UX, graphisme & contenus</h3><p>Maquettes, logos, visuels de boutique, captures de présentation, textes et cohérence des interfaces.</p><div class="career-meta"><span class="pill">Portfolio utile</span><span class="pill">Design</span><span class="pill">Communication</span></div></article>
+          <article class="career-card"><div class="feature-icon">🤝</div><div class="project-type">Développement commercial</div><h3>Partenariats & terrain</h3><p>Présentation des solutions, recherche de partenaires pilotes, retour utilisateur et suivi des besoins locaux.</p><div class="career-meta"><span class="pill">RDC</span><span class="pill">Terrain</span><span class="pill">Partenariats</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head"><div><div class="section-kicker">Ce qui compte</div><h2 class="section-title">Curiosité, sérieux<br/>et envie de progresser.</h2></div></div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon">🧠</div><h3>Apprentissage continu</h3><p>Être prêt à chercher, tester, documenter et apprendre de nouvelles méthodes au fil du projet.</p></article>
+          <article class="feature-card"><div class="feature-icon">✅</div><h3>Travail vérifiable</h3><p>Livrer des changements clairs, testables et expliqués plutôt que des promesses difficiles à contrôler.</p></article>
+          <article class="feature-card"><div class="feature-icon">🔒</div><h3>Respect des données</h3><p>Prendre au sérieux la confidentialité, les accès, les règles de sécurité et la confiance des utilisateurs.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="candidature">
+      <div class="container form-grid">
+        <div>
+          <div class="section-kicker">Candidature</div>
+          <h2 class="section-title">Présente ton profil<br/>et ce que tu sais faire.</h2>
+          <p class="section-copy">Indique le domaine qui t'intéresse, ton niveau actuel et un lien vers un portfolio ou GitHub quand c'est possible. Les candidatures sont reçues via Netlify Forms.</p>
+          <div class="notice" style="margin-top:22px">Une candidature envoyée ne garantit pas une offre ou une mission. Elle permet à Media Vision de reprendre contact lorsqu'une opportunité adaptée apparaît.</div>
+        </div>
+        <form class="form-box" name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+          <input type="hidden" name="form-name" value="career-application"/>
+          <p hidden><label>Ne pas remplir : <input name="bot-field"/></label></p>
+          <div class="field-row">
+            <div class="field"><label for="prenom">Prénom *</label><input id="prenom" name="prenom" required/></div>
+            <div class="field"><label for="nom">Nom *</label><input id="nom" name="nom" required/></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="email">Email *</label><input id="email" type="email" name="email" required/></div>
+            <div class="field"><label for="telephone">Téléphone</label><input id="telephone" type="tel" name="telephone" placeholder="+243 ..."/></div>
+          </div>
+          <div class="field"><label for="domaine">Domaine souhaité *</label><select id="domaine" name="domaine" required><option value="">Choisir...</option><option>Flutter / mobile</option><option>Développement web</option><option>UI/UX et graphisme</option><option>Communication / contenus</option><option>Partenariats / commercial</option><option>Autre collaboration</option></select></div>
+          <div class="field"><label for="niveau">Niveau actuel</label><select id="niveau" name="niveau"><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option><option>Étudiant / en formation</option></select></div>
+          <div class="field"><label for="portfolio">Portfolio, GitHub ou LinkedIn</label><input id="portfolio" type="url" name="portfolio" placeholder="https://..."/></div>
+          <div class="field"><label for="cv">CV ou document de présentation</label><input id="cv" type="file" name="cv" accept=".pdf,.doc,.docx"/></div>
+          <div class="field"><label for="message">Pourquoi souhaites-tu collaborer ? *</label><textarea id="message" name="message" required></textarea></div>
+          <label style="display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--muted)"><input type="checkbox" name="consentement" required style="margin-top:5px"/> J'accepte que mes informations soient utilisées uniquement pour étudier ma candidature et me recontacter.</label>
+          <button class="btn btn-primary" type="submit">Envoyer ma candidature</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid"><div><a class="brand" href="index.html">Media<span>Vision</span></a><p style="margin-top:14px">Applications, sites web et solutions numériques conçus depuis la RDC.</p></div><div><div class="footer-title">Découvrir</div><a href="applications.html">Applications</a><a href="realisations.html">Réalisations</a><a href="carrieres.html">Carrières</a></div><div><div class="footer-title">Informations</div><a href="about.html">À propos</a><a href="privacy-policy.html">Confidentialité</a><a href="terms.html">Conditions</a></div></div>
+      <div class="footer-bottom"><span>© 2026 Media Vision.</span><span>hello.mediavision.tech@gmail.com</span></div>
+    </div>
+  </footer>
+</body>
+</html>
