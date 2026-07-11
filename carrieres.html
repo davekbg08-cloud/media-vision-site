@@ -61,19 +61,16 @@
 
     <section class="section section-soft" id="candidature">
       <div class="container form-grid">
-        <div><div class="section-kicker">Candidature</div><h2 class="section-title">Présente ton profil<br/>et ce que tu sais faire.</h2><p class="section-copy">Indique le domaine qui t'intéresse, ton niveau actuel et un lien vers un portfolio ou GitHub lorsque c'est possible.</p><div class="notice" style="margin-top:22px">Une candidature envoyée ne garantit pas une offre ou une mission. Elle permet à Media Vision de reprendre contact lorsqu'une opportunité adaptée apparaît.</div></div>
-        <form class="form-box" name="career-application" method="POST" action="/merci.html" data-netlify="true" netlify netlify-honeypot="bot-field" enctype="multipart/form-data">
-          <input type="hidden" name="form-name" value="career-application"/>
-          <input type="hidden" name="subject" value="Nouvelle candidature Media Vision"/>
+        <div><div class="section-kicker">Candidature</div><h2 class="section-title">Présente ton profil<br/>et ce que tu sais faire.</h2><p class="section-copy">Indique ton domaine, ton niveau et ajoute dans le message un lien vers ton portfolio, GitHub, LinkedIn ou ton CV sur Drive.</p><div class="notice" style="margin-top:22px">Une candidature envoyée ne garantit pas une offre ou une mission. Elle permet à Media Vision de reprendre contact lorsqu'une opportunité adaptée apparaît.</div></div>
+        <form class="form-box" name="contact" method="POST" action="/merci.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact"/>
           <p hidden><label>Ne pas remplir : <input name="bot-field"/></label></p>
           <div class="field-row"><div class="field"><label for="prenom">Prénom *</label><input id="prenom" name="prenom" type="text" required/></div><div class="field"><label for="nom">Nom *</label><input id="nom" name="nom" type="text" required/></div></div>
           <div class="field-row"><div class="field"><label for="email">Email *</label><input id="email" type="email" name="email" required/></div><div class="field"><label for="telephone">Téléphone</label><input id="telephone" type="tel" name="telephone" placeholder="+243 ..."/></div></div>
-          <div class="field"><label for="domaine">Domaine souhaité *</label><select id="domaine" name="domaine" required><option value="">Choisir...</option><option>Flutter / mobile</option><option>Développement web</option><option>UI/UX et graphisme</option><option>Communication / contenus</option><option>Partenariats / commercial</option><option>Autre collaboration</option></select></div>
-          <div class="field"><label for="niveau">Niveau actuel</label><select id="niveau" name="niveau"><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option><option>Étudiant / en formation</option></select></div>
-          <div class="field"><label for="portfolio">Portfolio, GitHub ou LinkedIn</label><input id="portfolio" type="url" name="portfolio" placeholder="https://..."/></div>
-          <div class="field"><label for="cv">CV ou document de présentation</label><input id="cv" type="file" name="cv" accept=".pdf,.doc,.docx"/></div>
-          <div class="field"><label for="message">Pourquoi souhaites-tu collaborer ? *</label><textarea id="message" name="message" required></textarea></div>
-          <label style="display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--muted)"><input type="checkbox" name="consentement" required style="margin-top:5px"/> J'accepte que mes informations soient utilisées uniquement pour étudier ma candidature et me recontacter.</label>
+          <div class="field"><label for="service">Domaine souhaité *</label><select id="service" name="service" required><option value="">Choisir...</option><option>Candidature — Flutter / mobile</option><option>Candidature — Développement web</option><option>Candidature — UI/UX et graphisme</option><option>Candidature — Communication / contenus</option><option>Candidature — Partenariats / commercial</option><option>Candidature — Autre collaboration</option></select></div>
+          <div class="field"><label for="project_level">Niveau actuel *</label><select id="project_level" name="project_level" required><option value="">Choisir...</option><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option><option>Étudiant / en formation</option></select></div>
+          <div class="field"><label for="projet">Présentation, motivation et liens *</label><textarea id="projet" name="projet" required placeholder="Présente tes compétences, explique pourquoi tu souhaites collaborer et ajoute un lien vers ton portfolio, GitHub, LinkedIn ou ton CV sur Drive."></textarea></div>
+          <label style="display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--muted)"><input type="checkbox" required style="margin-top:5px"/> J'accepte que mes informations soient utilisées uniquement pour étudier ma candidature et me recontacter.</label>
           <button class="btn btn-primary" type="submit">Envoyer ma candidature</button>
         </form>
       </div>
