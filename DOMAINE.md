@@ -31,7 +31,7 @@ une page de parking du registraire). La propagation prend de quelques minutes à
 
 Dépôt `media-vision-site` → **Settings → Pages** :
 
-- *Build and deployment* → Source : **GitHub Actions** (déjà le cas).
+- *Build and deployment* → Source : choisir **GitHub Actions** (actuellement « Deploy from a branch » : le site est publié tel quel, sans `sitemap.xml`, `robots.txt` ni `CNAME` générés).
 - *Custom domain* : saisir `www.mondomaine.cd` puis **Save**.
 - Quand la vérification DNS est verte, cocher **Enforce HTTPS**.
 
