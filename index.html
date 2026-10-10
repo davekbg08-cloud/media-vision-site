@@ -322,9 +322,10 @@
         <div class="form-feat">🎯 Accompagnement personnalisé</div>
       </div>
     </div>
-    <form class="form-box" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-      <input type="hidden" name="form-name" value="contact"/>
-      <p style="display:none"><input name="bot-field"/></p>
+    <form class="form-box" id="contactForm" name="contact" method="POST" action="https://formsubmit.co/hello.mediavision.tech@gmail.com">
+      <input type="hidden" name="_subject" value="Nouvelle demande — site Media Vision"/>
+      <input type="hidden" name="_template" value="table"/>
+      <p style="display:none"><input name="_honey" tabindex="-1" autocomplete="off"/></p>
       <div class="form-row">
         <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" placeholder="Jean" required/></div>
         <div class="form-group"><label>Nom *</label><input type="text" name="nom" placeholder="Dupont" required/></div>
@@ -372,7 +373,7 @@
   </div>
   <div class="footer-bottom">
     <p id="fCopy"></p>
-    <div class="footer-socials"><a href="https://github.com/davekbg08-cloud/desktop-tutorial" target="_blank" rel="noopener noreferrer">GitHub</a><a href="applications.html">Applications</a><a href="privacy-policy.html">Confidentialité</a><a href="mailto:hello.mediavision.tech@gmail.com">Email</a></div>
+    <div class="footer-socials"><a href="https://github.com/davekbg08-cloud" target="_blank" rel="noopener noreferrer">GitHub</a><a href="applications.html">Applications</a><a href="privacy-policy.html">Confidentialité</a><a href="mailto:hello.mediavision.tech@gmail.com">Email</a></div>
   </div>
 </footer>
 
@@ -549,12 +550,14 @@ document.getElementById('contactForm').addEventListener('submit', async function
   btn.textContent = 'Envoi en cours...';
   btn.disabled = true;
   try {
-    const res = await fetch('/', {
+    // Envoi via FormSubmit (fonctionne sur GitHub Pages, sans serveur).
+    const res = await fetch(this.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(this)).toString(),
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(this),
     });
-    if (res.ok) {
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && String(data.success) === 'true') {
       btn.style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
     } else {

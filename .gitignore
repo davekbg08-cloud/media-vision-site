@@ -1,2 +1,6 @@
 # Local Netlify folder
 .netlify
+
+# Sortie de build (npm run build)
+dist/
+node_modules/

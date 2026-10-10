@@ -1,14 +1,20 @@
-# Media Vision
+# Media Vision — site vitrine
 
-Projet statique récupéré depuis le deploy Netlify `media-vision`.
+Site statique de Media Vision : présentation, applications (MedConnect, Occasion, Ma Gestion…),
+réalisations, carrières, pages légales.
+
+- En ligne : https://davekbg08-cloud.github.io/media-vision-site/
+- Nom de domaine personnalisé : voir **[DOMAINE.md](DOMAINE.md)**
 
 ## Fichiers principaux
 
 - `index.html` : page complète du site, avec le HTML, le CSS et le JavaScript intégrés.
 - `applications.html` : page catalogue des applications, avec les liens Play Store/APK.
 - `downloads/` : dossier prévu pour les fichiers APK référencés par `applications.html`.
-- `netlify.toml` : configuration Netlify pour publier la racine du dépôt.
-- `package.json` : scripts simples pour lancer le site localement.
+- `build-static.mjs` : copie le site dans `dist/` (+ `CNAME`, `sitemap.xml`, `robots.txt`).
+- `.github/workflows/pages.yml` : publication automatique sur GitHub Pages à chaque push sur `main`.
+- `netlify.toml` : configuration Netlify (ancien hébergement, toujours compatible).
+- `package.json` : scripts `build` et `dev`.
 
 ## Modifier le site
 
@@ -28,6 +34,8 @@ npm run dev
 
 Puis ouvrir `http://localhost:8080`.
 
-## Deployer sur Netlify
+## Publier
 
-Netlify peut publier ce dépôt directement. La configuration actuelle publie la racine du projet, sans commande de build.
+Pousser sur `main` suffit : GitHub Actions construit `dist/` et le publie sur GitHub Pages.
+
+Les formulaires de contact et de candidature passent par FormSubmit (voir `DOMAINE.md`).
