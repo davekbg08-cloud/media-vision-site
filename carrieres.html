@@ -62,9 +62,10 @@
     <section class="section section-soft" id="candidature">
       <div class="container form-grid">
         <div><div class="section-kicker">Candidature</div><h2 class="section-title">Présente ton profil<br/>et ce que tu sais faire.</h2><p class="section-copy">Indique ton domaine, ton niveau et ajoute dans le message un lien vers ton portfolio, GitHub, LinkedIn ou ton CV sur Drive.</p><div class="notice" style="margin-top:22px">Une candidature envoyée ne garantit pas une offre ou une mission. Elle permet à Media Vision de reprendre contact lorsqu'une opportunité adaptée apparaît.</div></div>
-        <form class="form-box" name="contact" method="POST" action="/merci.html" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact"/>
-          <p hidden><label>Ne pas remplir : <input name="bot-field"/></label></p>
+        <form class="form-box" id="candidatureForm" name="candidature" method="POST" action="https://formsubmit.co/hello.mediavision.tech@gmail.com">
+          <input type="hidden" name="_subject" value="Nouvelle candidature — site Media Vision"/>
+          <input type="hidden" name="_template" value="table"/>
+          <p hidden><label>Ne pas remplir : <input name="_honey" tabindex="-1" autocomplete="off"/></label></p>
           <div class="field-row"><div class="field"><label for="prenom">Prénom *</label><input id="prenom" name="prenom" type="text" required/></div><div class="field"><label for="nom">Nom *</label><input id="nom" name="nom" type="text" required/></div></div>
           <div class="field-row"><div class="field"><label for="email">Email *</label><input id="email" type="email" name="email" required/></div><div class="field"><label for="telephone">Téléphone</label><input id="telephone" type="tel" name="telephone" placeholder="+243 ..."/></div></div>
           <div class="field"><label for="service">Domaine souhaité *</label><select id="service" name="service" required><option value="">Choisir...</option><option>Candidature — Flutter / mobile</option><option>Candidature — Développement web</option><option>Candidature — UI/UX et graphisme</option><option>Candidature — Communication / contenus</option><option>Candidature — Partenariats / commercial</option><option>Candidature — Autre collaboration</option></select></div>
@@ -78,5 +79,26 @@
   </main>
 
   <footer><div class="container"><div class="footer-grid"><div><a class="brand" href="index.html">Media<span>Vision</span></a><p style="margin-top:14px">Applications, sites web et solutions numériques conçus depuis la RDC.</p></div><div><div class="footer-title">Découvrir</div><a href="applications.html">Applications</a><a href="realisations.html">Réalisations</a><a href="carrieres.html">Carrières</a></div><div><div class="footer-title">Informations</div><a href="about.html">À propos</a><a href="privacy-policy.html">Confidentialité</a><a href="terms.html">Conditions</a></div></div><div class="footer-bottom"><span>© 2026 Media Vision.</span><span>hello.mediavision.tech@gmail.com</span></div></div></footer>
+<script>
+// Envoi via FormSubmit puis redirection vers merci.html (fonctionne sur GitHub Pages).
+document.getElementById('candidatureForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours...';
+  try {
+    const res = await fetch(this.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(this),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && String(data.success) === 'true') { window.location.href = 'merci.html'; return; }
+  } catch (_) {}
+  btn.disabled = false;
+  btn.textContent = 'Envoyer ma candidature';
+  alert("L'envoi a échoué. Écris-nous directement à hello.mediavision.tech@gmail.com.");
+});
+</script>
 </body>
 </html>

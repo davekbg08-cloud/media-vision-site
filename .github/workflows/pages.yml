@@ -24,13 +24,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      # Domaine personnalisé : définir les variables du dépôt CUSTOM_DOMAIN
+      # (ex. www.mondomaine.cd) et SITE_URL (ex. https://www.mondomaine.cd)
+      # dans Settings > Secrets and variables > Actions > Variables.
+      # Voir DOMAINE.md.
+      - name: Build static site
+        run: npm run build
+        env:
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+          SITE_URL: ${{ vars.SITE_URL }}
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
